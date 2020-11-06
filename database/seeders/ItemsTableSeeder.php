@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -12,10 +14,6 @@ class ItemsTableSeeder extends Seeder
      */
     public function run()
     {
-        // $items = ['デスク', 'イス', 'パソコン', 'ライト', 'モニター', 'デスクスタンド', 'その他'];
-        // $items_en = ['Desk', 'Chair', 'Personal Computer', 'Light', 'PC Monitor', 'Desk Stand', 'Others'];
-        $items = array('jp' => 'デスク',);
-
         DB::table('items')->insert([
             [
                 'name' => 'デスク',
