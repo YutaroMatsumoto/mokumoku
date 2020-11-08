@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+// use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,20 +15,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::get('/user',function (Request $request) {
+// Route::get('/user',function (Request $request) {
 	
-	$users = App\Models\User::all();
+// 	$users = App\Models\User::all();
 	
-	return response()->json(['users' => $users]);
+// 	return response()->json(['users' => $users]);ß
 
-});
+// });
 
-Route::get('/user/{user}', function(App\Models\User $user){
+// Route::get('/user/{user}', function(App\Models\User $user){
 
-	return response()->json(['user' => $user]);
+// 	return response()->json(['user' => $user]);
 
+// });
+
+Route::group(['middleware' => 'api'], function() {
+	Route::get('get', 'App\Http\Controllers\ItemController@index');
+	Route::post('add', 'App\Http\Controllers\ItemController@create');
+	Route::post('edit', 'App\Http\Controllers\ItemController@edit');
 });
