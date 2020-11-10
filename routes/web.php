@@ -20,3 +20,7 @@ Route::get('/{any}', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// 11/10に追記コントローラーの修正が必要
+Route::get('/{item_posts}', 'App\Http\Controllers\ItemController@index');
+
