@@ -34,7 +34,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::group(['middleware' => 'api'], function() {
-	Route::get('get', 'App\Http\Controllers\ItemController@index');
-	Route::post('add', 'App\Http\Controllers\ItemController@create');
-	Route::post('edit', 'App\Http\Controllers\ItemController@edit');
+	Route::get('item', 'App\Http\Controllers\ItemController@index');
+	// Route::post('add', 'App\Http\Controllers\ItemController@create');
+	// Route::post('edit', 'App\Http\Controllers\ItemController@edit');
+	Route::get('item/{item_posts}', 'App\Http\Controllers\ItemController@index');
 });
