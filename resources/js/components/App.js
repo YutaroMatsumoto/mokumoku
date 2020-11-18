@@ -9,16 +9,6 @@ import User from './User';
 import UserDetail from './UserDetail';
 import Axios from 'axios';
 
-function Items(props) {
-    return props.items.map(item => {
-        return (
-            <tr key={item.id}>
-                <td>{item.name}</td>
-            </tr>
-        );
-    });
-}
-
 // function App() {
 //     return (
         // <Router>
@@ -41,40 +31,13 @@ function Items(props) {
 // }
 
 class App extends Component {
-    constructor(){
-        super();
-        this.state = {
-            items: [],
-            item: ''
-        }
-    }
-
-    // コンポーネントがマウントされた時点で初期描画用のtodosをAPIから取得
-    componentDidMount() {
-        axios.get('/api/get')
-             .then((response) => {
-                 console.log(response);
-                 this.setState({
-                     items: response.data
-                 })
-             })
-             .catch(error => {
-                 console.log(error);
-             })
-    }
-
     render() {
         return (
-            <React.Fragment>
-                <table>
-                    <tbody>
-                        <Items items={this.state.items}/>
-                    </tbody>
-                </table>
-                {/* aaaa */}
-            </React.Fragment>
+            <Top/>
         )
     }
+
+    
 }
 
 if (document.getElementById('app')) {
