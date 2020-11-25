@@ -3,7 +3,7 @@ import Items from './Items'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { readItems } from '../actions/index'
+import { readGroups } from '../actions/index'
 
 class Top extends Component {
     // constructor(){
@@ -26,7 +26,7 @@ class Top extends Component {
         //      .catch(error => {
         //          console.log(error);
         //      })
-        this.props.readItems()
+        this.props.readGroups()
     }
 
     render() {
@@ -36,9 +36,9 @@ class Top extends Component {
                     <tbody>
                         {/* <div>{console.log(this.props.items)}</div> */}
                         {/* <Items items={this.state.items}/> */}
-                        {_.map(this.props.items, item => (
-                            <tr key={item.id}>
-                                <td>{item.name}</td>
+                        {_.map(this.props.groups, group => (
+                            <tr key={group.id}>
+                                <td>{group.name}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -49,9 +49,9 @@ class Top extends Component {
     }
 }
 
-const mapStateToProps = state => ({ items: state.items })
+const mapStateToProps = state => ({ groups: state.groups })
 
-const mapDispatchToProps = ({ readItems })
+const mapDispatchToProps = ({ readGroups })
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Top);

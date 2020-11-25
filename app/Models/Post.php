@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Item extends Model
+class Post extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function product_posts()
+    public function groups()
     {
-        return $this->hasMany(ProductPost::class);
+        return $this->belongsTo(Group::class);
     }
 }

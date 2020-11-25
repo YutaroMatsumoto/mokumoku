@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\ItemController;
+// use App\Http\Controllers\GroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +34,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::group(['middleware' => 'api'], function() {
-	Route::get('get', 'App\Http\Controllers\ItemController@index');
-	Route::post('add', 'App\Http\Controllers\ItemController@create');
-	Route::post('edit', 'App\Http\Controllers\ItemController@edit');
-	// Route::get('get', 'App\Http\Controllers\ItemController@index');
+	Route::get('get', 'App\Http\Controllers\GroupController@index');
+	Route::post('add', 'App\Http\Controllers\GroupController@create');
+	Route::post('edit', 'App\Http\Controllers\GroupController@edit');
+	// Route::get('get', 'App\Http\Controllers\GroupController@index');
 });

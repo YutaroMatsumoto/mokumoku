@@ -70024,13 +70024,13 @@ module.exports = function(module) {
 /*!***************************************!*\
   !*** ./resources/js/actions/index.js ***!
   \***************************************/
-/*! exports provided: READ_ITEMS, readItems */
+/*! exports provided: READ_GROUPS, readGroups */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "READ_ITEMS", function() { return READ_ITEMS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "readItems", function() { return readItems; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "READ_GROUPS", function() { return READ_GROUPS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "readGroups", function() { return readGroups; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -70046,10 +70046,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
  // reducerで利用するため、export
 
-var READ_ITEMS = 'READ_ITEMS'; // viewのcomponent側で使用するため、exportする
+var READ_GROUPS = 'READ_GROUPS'; // viewのcomponent側で使用するため、exportする
 // tunkによって、actionの代わりに関数を返すことができるようになっている
 
-var readItems = function readItems() {
+var readGroups = function readGroups() {
   return /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(dispatch) {
       var response;
@@ -70068,7 +70068,7 @@ var readItems = function readItems() {
               console.log('あああああ');
               console.log('あああああ');
               dispatch({
-                type: READ_ITEMS,
+                type: READ_GROUPS,
                 response: response
               }); // reducerに渡す。これにより、actionはtype, responseのkeyをもつ
 
@@ -70258,15 +70258,15 @@ var Top = /*#__PURE__*/function (_Component) {
       //      .catch(error => {
       //          console.log(error);
       //      })
-      this.props.readItems();
+      this.props.readGroups();
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, lodash__WEBPACK_IMPORTED_MODULE_3___default.a.map(this.props.items, function (item) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, lodash__WEBPACK_IMPORTED_MODULE_3___default.a.map(this.props.groups, function (group) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-          key: item.id
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.name));
+          key: group.id
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, group.name));
       }))));
     }
   }]);
@@ -70276,12 +70276,12 @@ var Top = /*#__PURE__*/function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    items: state.items
+    groups: state.groups
   };
 };
 
 var mapDispatchToProps = {
-  readItems: _actions_index__WEBPACK_IMPORTED_MODULE_4__["readItems"]
+  readGroups: _actions_index__WEBPACK_IMPORTED_MODULE_4__["readGroups"]
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Top));
 
@@ -70321,29 +70321,10 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 
 /***/ }),
 
-/***/ "./resources/js/reducers/index.js":
-/*!****************************************!*\
-  !*** ./resources/js/reducers/index.js ***!
-  \****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _items__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./items */ "./resources/js/reducers/items.js");
-
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  items: _items__WEBPACK_IMPORTED_MODULE_1__["default"]
-}));
-
-/***/ }),
-
-/***/ "./resources/js/reducers/items.js":
-/*!****************************************!*\
-  !*** ./resources/js/reducers/items.js ***!
-  \****************************************/
+/***/ "./resources/js/reducers/groups.js":
+/*!*****************************************!*\
+  !*** ./resources/js/reducers/groups.js ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -70355,19 +70336,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  var events = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var groups = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _actions_index__WEBPACK_IMPORTED_MODULE_1__["READ_ITEMS"]:
+    case _actions_index__WEBPACK_IMPORTED_MODULE_1__["READ_GROUPS"]:
       console.log(action);
       console.log(lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data, 'id'));
       return lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data, 'id');
 
     default:
-      return events;
+      return groups;
   }
 });
+
+/***/ }),
+
+/***/ "./resources/js/reducers/index.js":
+/*!****************************************!*\
+  !*** ./resources/js/reducers/index.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _groups__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./groups */ "./resources/js/reducers/groups.js");
+
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
+  groups: _groups__WEBPACK_IMPORTED_MODULE_1__["default"]
+}));
 
 /***/ }),
 
@@ -70389,8 +70389,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/matsumotoyuutarou/Sources/remote_items/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/matsumotoyuutarou/Sources/remote_items/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/matsumotoyuutarou/Sources/mokumoku/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/matsumotoyuutarou/Sources/mokumoku/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

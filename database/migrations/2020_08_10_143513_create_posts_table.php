@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductPostsTable extends Migration
+class CreatePostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateProductPostsTable extends Migration
      */
     public function up()
     {
-        // 投稿された各商品
-        Schema::create('product_posts', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->comment('ユーザーid');
-            $table->unsignedBigInteger('item_id')->comment('アイテムid');
+            $table->unsignedBigInteger('group_id')->comment('グループid');
             $table->string('title')->comment('投稿のタイトル');
-            $table->string('content')->comment('投稿の内容');
-            $table->string('price')->comment('商品の値段');
-            $table->string('url')->comment('商品のurl');
+            $table->date('date')->comment('投稿の日付');
+            $table->text('content')->comment('投稿の内容');
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -30,9 +28,9 @@ class CreateProductPostsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('item_id')
+            $table->foreign('group_id')
                 ->references('id')
-                ->on('items');
+                ->on('groups');
         });
     }
 
@@ -43,6 +41,6 @@ class CreateProductPostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_posts');
+        Schema::dropIfExists('posts');
     }
 }

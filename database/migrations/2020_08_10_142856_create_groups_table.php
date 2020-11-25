@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateItemsTable extends Migration
+class CreateGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateItemsTable extends Migration
      */
     public function up()
     {
-        // アイテム（ホーム画面に表示するジャンル）
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->bigIncrements('id');
-            // $table->unsignedBigInteger('genre_id')->comment('ジャンルid');
-            $table->string('name')->comment('アイテム名');
-            $table->string('name_en')->comment('アイテム名(英語)');
+            $table->unsignedBigInteger('user_id')->comment('ユーザーid');
+            $table->string('name')->comment('グループ名');
+            $table->string('detail')->nullable()->default(null)->comment('グループ詳細');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('groups');
     }
 }

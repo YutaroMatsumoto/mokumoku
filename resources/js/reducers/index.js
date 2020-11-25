@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux'
-import items from './items'
+import groups from './groups'
 
-export default combineReducers({ items })
+export default combineReducers({ groups })
