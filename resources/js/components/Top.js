@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Items from './Items'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import { Link }　from 'react-router-dom'
 
 import { readGroups } from '../actions/index'
 
@@ -43,6 +44,8 @@ class Top extends Component {
                         ))}
                     </tbody>
                 </table>
+                <Link to="/group/new">新しい勉強会グループを作成する</Link>
+
                 {/* aaaa */}
             </React.Fragment>
         )
