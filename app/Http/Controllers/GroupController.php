@@ -15,8 +15,8 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $items = Group::all();
-        return $items;
+        $groups = Group::all();
+        return $groups;
     }
 
     /**
@@ -24,9 +24,15 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $group = new Group;
+        $group->name = $request->input('name');
+        $group->detail = $request->input('detail');
+        $group->save();
+
+        $groups = Group::all();
+        return $groups;
     }
 
     /**
