@@ -26,7 +26,13 @@ class GroupController extends Controller
      */
     public function create(Request $request)
     {
+        logger('リクエストの中身を表示');
+        logger('リクエストの中身を表示');
+        logger($request);
+        logger('リクエストの中身を表示');
+        logger('リクエストの中身を表示');
         $group = new Group;
+        $group->user_id = 1;
         $group->name = $request->input('name');
         $group->detail = $request->input('detail');
         $group->save();
