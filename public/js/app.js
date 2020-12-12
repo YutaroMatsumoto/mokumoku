@@ -76109,6 +76109,38 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/redux-devtools-extension/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/redux-devtools-extension/index.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var compose = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js").compose;
+
+exports.__esModule = true;
+exports.composeWithDevTools = (
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ :
+    function() {
+      if (arguments.length === 0) return undefined;
+      if (typeof arguments[0] === 'object') return compose;
+      return compose.apply(null, arguments);
+    }
+);
+
+exports.devToolsEnhancer = (
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION__ :
+    function() { return function(noop) { return noop; } }
+);
+
+
+/***/ }),
+
 /***/ "./node_modules/redux-form/es/ConnectedField.js":
 /*!******************************************************!*\
   !*** ./node_modules/redux-form/es/ConnectedField.js ***!
@@ -86691,9 +86723,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
-/* harmony import */ var _components_Top__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Top */ "./resources/js/components/Top.js");
-/* harmony import */ var _components_group_new__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/group_new */ "./resources/js/components/group_new.js");
-/* harmony import */ var _reducers_index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./reducers/index */ "./resources/js/reducers/index.js");
+/* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
+/* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _components_Top__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Top */ "./resources/js/components/Top.js");
+/* harmony import */ var _components_group_new__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/group_new */ "./resources/js/components/group_new.js");
+/* harmony import */ var _reducers_index__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./reducers/index */ "./resources/js/reducers/index.js");
+
 
 
 
@@ -86704,17 +86739,20 @@ __webpack_require__.r(__webpack_exports__);
 
  // import * as serviceWorker from './serviceWorker';
 // redux thunk ミドルウェアを使うことで、actioncreatorが、actionの代わりに関数を返すことができるようになる
+// const store = createStore(reducer, applyMiddleware(thunk))
+// dev環境の場合はdebugできるよう設定
 
-var store = Object(redux__WEBPACK_IMPORTED_MODULE_2__["createStore"])(_reducers_index__WEBPACK_IMPORTED_MODULE_8__["default"], Object(redux__WEBPACK_IMPORTED_MODULE_2__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_5__["default"]));
+var enhancer =  true ? Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_6__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_2__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_5__["default"])) : undefined;
+var store = Object(redux__WEBPACK_IMPORTED_MODULE_2__["createStore"])(_reducers_index__WEBPACK_IMPORTED_MODULE_9__["default"], enhancer);
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
   store: store
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
   exact: true,
   path: "/",
-  component: _components_Top__WEBPACK_IMPORTED_MODULE_6__["default"]
+  component: _components_Top__WEBPACK_IMPORTED_MODULE_7__["default"]
 }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
   path: "/group/new",
-  component: _components_group_new__WEBPACK_IMPORTED_MODULE_7__["default"]
+  component: _components_group_new__WEBPACK_IMPORTED_MODULE_8__["default"]
 })))), document.getElementById('app')); // serviceWorker.unregister();
 
 /***/ }),
