@@ -86624,7 +86624,12 @@ var GroupNew = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var handleSubmit = this.props.handleSubmit; //renderしたときにとってくる？
+      var _this$props = this.props,
+          handleSubmit = _this$props.handleSubmit,
+          pristine = _this$props.pristine,
+          submitting = _this$props.submitting; // 上記について）renderしたときにとってくる？
+      // pristine: 入力されていないとtrueを返す。入力されているとfalseを返す。
+      // submitting: 送信されるとtrueを返す。送信する前はfalseを返す。
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "\u65B0\u898F\u4F5C\u6210\u753B\u9762"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
         onSubmit: handleSubmit(this.onSubmit)
@@ -86641,7 +86646,7 @@ var GroupNew = /*#__PURE__*/function (_Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         type: "submit",
         value: "Submit",
-        disabled: false
+        disabled: pristine || submitting
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
         to: "/"
       }, "Cancel"))));

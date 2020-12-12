@@ -29,7 +29,11 @@ class GroupNew extends Component {
     }
 
     render() {
-        const { handleSubmit } = this.props //renderしたときにとってくる？
+        const { handleSubmit, pristine, submitting } = this.props
+        // 上記について）renderしたときにとってくる？
+        // pristine: 入力されていないとtrueを返す。入力されているとfalseを返す。
+        // submitting: 送信されるとtrueを返す。送信する前はfalseを返す。
+        
         return (
             <div>
                 <h1>新規作成画面</h1>
@@ -40,7 +44,7 @@ class GroupNew extends Component {
                         {/* <Field label="Name" name="name" type="text" component="input" placeholder="グループ名"/> */}
                     </div>
                     <div>
-                        <input type="submit" value="Submit" disabled={false} />
+                        <input type="submit" value="Submit" disabled={pristine || submitting} />
                         <Link to="/">Cancel</Link>
                     </div>
                 </form>
