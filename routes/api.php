@@ -37,5 +37,5 @@ Route::group(['middleware' => 'api'], function() {
 	Route::get('get', 'App\Http\Controllers\GroupController@index');
 	Route::post('add', 'App\Http\Controllers\GroupController@create');
 	Route::post('edit', 'App\Http\Controllers\GroupController@edit');
-	// Route::get('get', 'App\Http\Controllers\GroupController@index');
+	Route::get('getposts/{id}', 'App\Http\Controllers\PostController@index');
 });

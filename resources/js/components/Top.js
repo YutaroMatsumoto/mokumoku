@@ -39,12 +39,12 @@ class Top extends Component {
                         {/* <Items items={this.state.items}/> */}
                         {_.map(this.props.groups, group => (
                             <tr key={group.id}>
-                                <td>{group.name}</td>
+                                <td><Link to={`/groups/${group.id}/posts`}>{group.name}</Link></td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-                <Link to="/group/new">新しい勉強会グループを作成する</Link>
+                <Link to="/groups/new">新しい勉強会グループを作成する</Link>
 
                 {/* aaaa */}
             </React.Fragment>

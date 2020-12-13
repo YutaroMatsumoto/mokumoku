@@ -4,6 +4,7 @@ import { get } from 'jquery'
 // reducerで利用するため、export
 export const READ_GROUPS = 'READ_GROUPS'
 export const CREATE_GROUP = 'CREATE_GROUP'
+export const READ_POSTS = 'READ_POSTS'
 
 // viewのcomponent側で使用するため、exportする
 // tunkによって、actionの代わりに関数を返すことができるようになっている
@@ -27,4 +28,16 @@ export const createGroup = values => async dispatch => {
     console.log('いいいいい')
 
     dispatch({ type: CREATE_GROUP, response }) // reducerに渡す。これにより、actionはtype, responseのkeyをもつ
+}
+
+export const readPosts = id => async dispatch => {
+    const response =  await axios.get(`/api/getposts/${id}`)
+    console.log('ううううう')
+    console.log('ううううう')
+    // console.log(response)
+    console.log(id)
+    console.log('ううううう')
+    console.log('ううううう')
+
+    dispatch({ type: READ_POSTS, response })
 }

@@ -8,6 +8,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import Top from './components/Top'
 import GroupNew from './components/group_new'
+import PostIndex from './components/post_index'
 import reducer from './reducers/index'
 // import * as serviceWorker from './serviceWorker';
 
@@ -26,7 +27,9 @@ ReactDOM.render(
         <BrowserRouter>
             <Switch>
                 <Route exact path="/" component={Top} />
-                <Route path="/group/new" component={GroupNew} />
+                <Route exact path="/groups" component={Top} />
+                <Route path="/groups/new" component={GroupNew} />
+                <Route path="/groups/:id/posts" component={PostIndex} />
             </Switch>
         </BrowserRouter>
     </Provider>,

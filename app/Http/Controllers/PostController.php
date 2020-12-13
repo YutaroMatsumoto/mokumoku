@@ -3,19 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class GroupController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $groups = Group::all();
-        return $groups;
+        logger('idを表示');
+        logger($id);
+        logger('idを表示');
+        // $group_posts = Group::find($id)->posts()->get();
+        $group_posts = Group::with('posts')->find($id);
+        logger('うごいているよ');
+        logger('うごいているよ');
+        logger($group_posts);
+        logger('うごいているよ');
+        logger('うごいているよ');
+
+        return $id;
     }
 
     /**
@@ -25,19 +36,19 @@ class GroupController extends Controller
      */
     public function create(Request $request)
     {
-        logger('リクエストの中身を表示');
-        logger('リクエストの中身を表示');
-        logger($request);
-        logger('リクエストの中身を表示');
-        logger('リクエストの中身を表示');
-        $group = new Group;
-        $group->user_id = 1;
-        $group->name = $request->input('name');
-        $group->detail = $request->input('detail');
-        $group->save();
+        // logger('リクエストの中身を表示');
+        // logger('リクエストの中身を表示');
+        // logger($request);
+        // logger('リクエストの中身を表示');
+        // logger('リクエストの中身を表示');
+        // $group = new Group;
+        // $group->user_id = 1;
+        // $group->name = $request->input('name');
+        // $group->detail = $request->input('detail');
+        // $group->save();
 
-        $groups = Group::all();
-        return $groups;
+        // $groups = Group::all();
+        // return $groups;
     }
 
     /**

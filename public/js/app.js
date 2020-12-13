@@ -86236,15 +86236,17 @@ module.exports = function(module) {
 /*!***************************************!*\
   !*** ./resources/js/actions/index.js ***!
   \***************************************/
-/*! exports provided: READ_GROUPS, CREATE_GROUP, readGroups, createGroup */
+/*! exports provided: READ_GROUPS, CREATE_GROUP, READ_POSTS, readGroups, createGroup, readPosts */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "READ_GROUPS", function() { return READ_GROUPS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CREATE_GROUP", function() { return CREATE_GROUP; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "READ_POSTS", function() { return READ_POSTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "readGroups", function() { return readGroups; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createGroup", function() { return createGroup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "readPosts", function() { return readPosts; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -86261,7 +86263,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  // reducerで利用するため、export
 
 var READ_GROUPS = 'READ_GROUPS';
-var CREATE_GROUP = 'CREATE_GROUP'; // viewのcomponent側で使用するため、exportする
+var CREATE_GROUP = 'CREATE_GROUP';
+var READ_POSTS = 'READ_POSTS'; // viewのcomponent側で使用するため、exportする
 // tunkによって、actionの代わりに関数を返すことができるようになっている
 
 var readGroups = function readGroups() {
@@ -86333,6 +86336,43 @@ var createGroup = function createGroup(values) {
 
     return function (_x2) {
       return _ref2.apply(this, arguments);
+    };
+  }();
+};
+var readPosts = function readPosts(id) {
+  return /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(dispatch) {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/getposts/".concat(id));
+
+            case 2:
+              response = _context3.sent;
+              console.log('ううううう');
+              console.log('ううううう'); // console.log(response)
+
+              console.log(id);
+              console.log('ううううう');
+              console.log('ううううう');
+              dispatch({
+                type: READ_POSTS,
+                response: response
+              });
+
+            case 9:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function (_x3) {
+      return _ref3.apply(this, arguments);
     };
   }();
 };
@@ -86519,9 +86559,11 @@ var Top = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, lodash__WEBPACK_IMPORTED_MODULE_3___default.a.map(this.props.groups, function (group) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: group.id
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, group.name));
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+          to: "/groups/".concat(group.id, "/posts")
+        }, group.name)));
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
-        to: "/group/new"
+        to: "/groups/new"
       }, "\u65B0\u3057\u3044\u52C9\u5F37\u4F1A\u30B0\u30EB\u30FC\u30D7\u3092\u4F5C\u6210\u3059\u308B"));
     }
   }]);
@@ -86706,6 +86748,92 @@ var mapDispatchToProps = {
 
 /***/ }),
 
+/***/ "./resources/js/components/post_index.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/post_index.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Items__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Items */ "./resources/js/components/Items.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _actions_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions/index */ "./resources/js/actions/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+
+var PostIndex = /*#__PURE__*/function (_Component) {
+  _inherits(PostIndex, _Component);
+
+  var _super = _createSuper(PostIndex);
+
+  function PostIndex(props) {
+    _classCallCheck(this, PostIndex);
+
+    // initializeしたときにbind
+    console.log('あいうえお');
+    return _super.call(this, props); // this.onSubmit = this.onSubmit.bind(this)
+  } // コンポーネントがマウントされた時点で初期描画用のtodosをAPIから取得
+
+
+  _createClass(PostIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var id = this.props.match.params.id;
+      var aiueo = this.props;
+      console.log('東京');
+      this.props.readPosts(id);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u304F\u3043\u3046\u3048\u304A"));
+    }
+  }]);
+
+  return PostIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // const mapStateToProps = state => ({ posts: state.posts })
+
+
+var mapDispatchToProps = {
+  readPosts: _actions_index__WEBPACK_IMPORTED_MODULE_5__["readPosts"]
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatchToProps)(PostIndex));
+
+/***/ }),
+
 /***/ "./resources/js/index.js":
 /*!*******************************!*\
   !*** ./resources/js/index.js ***!
@@ -86727,7 +86855,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _components_Top__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Top */ "./resources/js/components/Top.js");
 /* harmony import */ var _components_group_new__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/group_new */ "./resources/js/components/group_new.js");
-/* harmony import */ var _reducers_index__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./reducers/index */ "./resources/js/reducers/index.js");
+/* harmony import */ var _components_post_index__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/post_index */ "./resources/js/components/post_index.js");
+/* harmony import */ var _reducers_index__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./reducers/index */ "./resources/js/reducers/index.js");
+
 
 
 
@@ -86743,7 +86873,7 @@ __webpack_require__.r(__webpack_exports__);
 // dev環境の場合はdebugできるよう設定
 
 var enhancer =  true ? Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_6__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_2__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_5__["default"])) : undefined;
-var store = Object(redux__WEBPACK_IMPORTED_MODULE_2__["createStore"])(_reducers_index__WEBPACK_IMPORTED_MODULE_9__["default"], enhancer);
+var store = Object(redux__WEBPACK_IMPORTED_MODULE_2__["createStore"])(_reducers_index__WEBPACK_IMPORTED_MODULE_10__["default"], enhancer);
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
   store: store
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
@@ -86751,8 +86881,15 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
   path: "/",
   component: _components_Top__WEBPACK_IMPORTED_MODULE_7__["default"]
 }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
-  path: "/group/new",
+  exact: true,
+  path: "/groups",
+  component: _components_Top__WEBPACK_IMPORTED_MODULE_7__["default"]
+}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+  path: "/groups/new",
   component: _components_group_new__WEBPACK_IMPORTED_MODULE_8__["default"]
+}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+  path: "/groups/:id/posts",
+  component: _components_post_index__WEBPACK_IMPORTED_MODULE_9__["default"]
 })))), document.getElementById('app')); // serviceWorker.unregister();
 
 /***/ }),
@@ -86781,6 +86918,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data, 'id'));
       return lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data, 'id');
 
+    case _actions_index__WEBPACK_IMPORTED_MODULE_1__["CREATE_GROUP"]:
     default:
       return groups;
   }
@@ -86800,13 +86938,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-form */ "./node_modules/redux-form/es/index.js");
 /* harmony import */ var _groups__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./groups */ "./resources/js/reducers/groups.js");
+/* harmony import */ var _posts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./posts */ "./resources/js/reducers/posts.js");
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   groups: _groups__WEBPACK_IMPORTED_MODULE_2__["default"],
+  posts: _posts__WEBPACK_IMPORTED_MODULE_3__["default"],
   form: redux_form__WEBPACK_IMPORTED_MODULE_1__["reducer"]
 }));
+
+/***/ }),
+
+/***/ "./resources/js/reducers/posts.js":
+/*!****************************************!*\
+  !*** ./resources/js/reducers/posts.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/index */ "./resources/js/actions/index.js");
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var posts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_index__WEBPACK_IMPORTED_MODULE_1__["READ_POSTS"]:
+      console.log(action);
+      console.log(lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data, 'id'));
+      return lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data, 'id');
+
+    default:
+      return posts;
+  }
+});
 
 /***/ }),
 
