@@ -15,6 +15,12 @@ class GroupController extends Controller
     public function index()
     {
         $groups = Group::all();
+        logger('groupコントローラ');
+        logger('groupコントローラ');
+        logger(gettype($groups));
+        logger('groupコントローラ');
+        logger('groupコントローラ');
+
         return $groups;
     }
 

@@ -34,8 +34,7 @@ export const readPosts = id => async dispatch => {
     const response =  await axios.get(`/api/getposts/${id}`)
     console.log('ううううう')
     console.log('ううううう')
-    // console.log(response)
-    console.log(id)
+    console.log(response)
     console.log('ううううう')
     console.log('ううううう')
 

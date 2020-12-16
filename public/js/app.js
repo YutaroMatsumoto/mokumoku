@@ -86353,9 +86353,8 @@ var readPosts = function readPosts(id) {
             case 2:
               response = _context3.sent;
               console.log('ううううう');
-              console.log('ううううう'); // console.log(response)
-
-              console.log(id);
+              console.log('ううううう');
+              console.log(response);
               console.log('ううううう');
               console.log('ううううう');
               dispatch({
@@ -86799,17 +86798,19 @@ var PostIndex = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(PostIndex);
 
-  function PostIndex(props) {
+  function PostIndex() {
     _classCallCheck(this, PostIndex);
 
-    // initializeしたときにbind
-    console.log('あいうえお');
-    return _super.call(this, props); // this.onSubmit = this.onSubmit.bind(this)
-  } // コンポーネントがマウントされた時点で初期描画用のtodosをAPIから取得
-
+    return _super.apply(this, arguments);
+  }
 
   _createClass(PostIndex, [{
     key: "componentDidMount",
+    // constructor(props) { // initializeしたときにbind
+    // console.log('あいうえお')
+    // super(props)
+    // this.onSubmit = this.onSubmit.bind(this)
+    // }
     value: function componentDidMount() {
       var id = this.props.match.params.id;
       var aiueo = this.props;
@@ -86819,18 +86820,28 @@ var PostIndex = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u304F\u3043\u3046\u3048\u304A"));
+      console.log(this.props.posts);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u304F\u3043\u3046\u3048\u304A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, lodash__WEBPACK_IMPORTED_MODULE_3___default.a.map(this.props.posts, function (post) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          key: post.id
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u65E5\u4ED8\uFF1A", post.date), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, post.title));
+      }))));
     }
   }]);
 
   return PostIndex;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // const mapStateToProps = state => ({ posts: state.posts })
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    posts: state.posts
+  };
+};
 
 var mapDispatchToProps = {
   readPosts: _actions_index__WEBPACK_IMPORTED_MODULE_5__["readPosts"]
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatchToProps)(PostIndex));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(PostIndex));
 
 /***/ }),
 
@@ -86914,11 +86925,20 @@ __webpack_require__.r(__webpack_exports__);
 
   switch (action.type) {
     case _actions_index__WEBPACK_IMPORTED_MODULE_1__["READ_GROUPS"]:
+      console.log('READ_GROUPSのろぐ');
       console.log(action);
+      console.log('READ_GROUPSのろぐ');
       console.log(lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data, 'id'));
       return lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data, 'id');
 
     case _actions_index__WEBPACK_IMPORTED_MODULE_1__["CREATE_GROUP"]:
+      console.log('CREATE_GROUPのろぐ');
+    // case READ_POSTS:
+    // console.log('READ_POSTSのろぐ')
+    // console.log(_.mapKeys(action.response.data.posts, 'id'))
+    // console.log('READ_POSTSのろぐ')
+    // return _.mapKeys(action.response.data.posts, 'id')
+
     default:
       return groups;
   }
@@ -86971,9 +86991,7 @@ __webpack_require__.r(__webpack_exports__);
 
   switch (action.type) {
     case _actions_index__WEBPACK_IMPORTED_MODULE_1__["READ_POSTS"]:
-      console.log(action);
-      console.log(lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data, 'id'));
-      return lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data, 'id');
+      return lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data.posts, 'id');
 
     default:
       return posts;

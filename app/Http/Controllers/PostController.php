@@ -15,18 +15,10 @@ class PostController extends Controller
      */
     public function index($id)
     {
-        logger('idを表示');
-        logger($id);
-        logger('idを表示');
         // $group_posts = Group::find($id)->posts()->get();
         $group_posts = Group::with('posts')->find($id);
-        logger('うごいているよ');
-        logger('うごいているよ');
-        logger($group_posts);
-        logger('うごいているよ');
-        logger('うごいているよ');
 
-        return $id;
+        return $group_posts;
     }
 
     /**
