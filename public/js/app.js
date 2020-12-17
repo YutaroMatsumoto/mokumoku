@@ -86559,7 +86559,7 @@ var Top = /*#__PURE__*/function (_Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: group.id
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
-          to: "/groups/".concat(group.id, "/posts")
+          to: "/groups/".concat(group.id)
         }, group.name)));
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
         to: "/groups/new"
@@ -86747,6 +86747,147 @@ var mapDispatchToProps = {
 
 /***/ }),
 
+/***/ "./resources/js/components/group_show.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/group_show.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var redux_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-form */ "./node_modules/redux-form/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _actions_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions/index */ "./resources/js/actions/index.js");
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+ // この画面は、グループの取得、作成、削除ができる
+
+var GroupShow = /*#__PURE__*/function (_Component) {
+  _inherits(GroupShow, _Component);
+
+  var _super = _createSuper(GroupShow);
+
+  function GroupShow(props) {
+    var _this;
+
+    _classCallCheck(this, GroupShow);
+
+    // initializeしたときにbind
+    _this = _super.call(this, props);
+    _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(GroupShow, [{
+    key: "renderField",
+    value: function renderField(field) {
+      var input = field.input,
+          label = field.label,
+          type = field.type,
+          _field$meta = field.meta,
+          touched = _field$meta.touched,
+          error = _field$meta.error;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({}, input, {
+        placeholder: label,
+        type: type
+      })), touched && error && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, error));
+    }
+  }, {
+    key: "onSubmit",
+    value: function () {
+      var _onSubmit = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(values) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                // await this.props.postGroup(values)
+                this.props.history.push('/');
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function onSubmit(_x) {
+        return _onSubmit.apply(this, arguments);
+      }
+
+      return onSubmit;
+    }()
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          handleSubmit = _this$props.handleSubmit,
+          pristine = _this$props.pristine,
+          submitting = _this$props.submitting; // 上記について）renderしたときにとってくる？
+      // pristine: 入力されていないとtrueを返す。入力されているとfalseを返す。
+      // submitting: 送信されるとtrueを返す。送信する前はfalseを返す。
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "\u30B0\u30EB\u30FC\u30D7\u7DE8\u96C6"));
+    }
+  }]);
+
+  return GroupShow;
+}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
+
+var validate = function validate(values) {
+  var errors = {};
+  if (!values.name) errors.name = "グループ名を入力してください。";
+  if (!values.detail) errors.detail = "説明を入力してください。";
+  console.log(errors);
+  return errors;
+}; // const mapDispatchToProps = ({ postGroup })
+
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, null)(Object(redux_form__WEBPACK_IMPORTED_MODULE_3__["reduxForm"])({
+  validate: validate,
+  form: 'groupShowForm'
+})(GroupShow)));
+
+/***/ }),
+
 /***/ "./resources/js/components/post_index.js":
 /*!***********************************************!*\
   !*** ./resources/js/components/post_index.js ***!
@@ -86806,22 +86947,17 @@ var PostIndex = /*#__PURE__*/function (_Component) {
 
   _createClass(PostIndex, [{
     key: "componentDidMount",
-    // constructor(props) { // initializeしたときにbind
-    // console.log('あいうえお')
-    // super(props)
-    // this.onSubmit = this.onSubmit.bind(this)
-    // }
     value: function componentDidMount() {
       var id = this.props.match.params.id;
-      var aiueo = this.props;
-      console.log('東京');
       this.props.readPosts(id);
     }
   }, {
     key: "render",
     value: function render() {
       console.log(this.props.posts);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u304F\u3043\u3046\u3048\u304A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, lodash__WEBPACK_IMPORTED_MODULE_3___default.a.map(this.props.posts, function (post) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+        to: "".concat(this.props.posts.group_id, "/edit")
+      }, "\u30B0\u30EB\u30FC\u30D7\u60C5\u5831\u3092\u7DE8\u96C6\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, lodash__WEBPACK_IMPORTED_MODULE_3___default.a.map(this.props.posts.posts, function (post) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: post.id
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u65E5\u4ED8\uFF1A", post.date), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, post.title));
@@ -86866,8 +87002,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _components_Top__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Top */ "./resources/js/components/Top.js");
 /* harmony import */ var _components_group_new__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/group_new */ "./resources/js/components/group_new.js");
-/* harmony import */ var _components_post_index__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/post_index */ "./resources/js/components/post_index.js");
-/* harmony import */ var _reducers_index__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./reducers/index */ "./resources/js/reducers/index.js");
+/* harmony import */ var _components_group_show__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/group_show */ "./resources/js/components/group_show.js");
+/* harmony import */ var _components_post_index__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/post_index */ "./resources/js/components/post_index.js");
+/* harmony import */ var _reducers_index__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./reducers/index */ "./resources/js/reducers/index.js");
+
 
 
 
@@ -86884,7 +87022,7 @@ __webpack_require__.r(__webpack_exports__);
 // dev環境の場合はdebugできるよう設定
 
 var enhancer =  true ? Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_6__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_2__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_5__["default"])) : undefined;
-var store = Object(redux__WEBPACK_IMPORTED_MODULE_2__["createStore"])(_reducers_index__WEBPACK_IMPORTED_MODULE_10__["default"], enhancer);
+var store = Object(redux__WEBPACK_IMPORTED_MODULE_2__["createStore"])(_reducers_index__WEBPACK_IMPORTED_MODULE_11__["default"], enhancer);
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
   store: store
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
@@ -86899,8 +87037,12 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
   path: "/groups/new",
   component: _components_group_new__WEBPACK_IMPORTED_MODULE_8__["default"]
 }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
-  path: "/groups/:id/posts",
-  component: _components_post_index__WEBPACK_IMPORTED_MODULE_9__["default"]
+  exact: true,
+  path: "/groups/:id",
+  component: _components_post_index__WEBPACK_IMPORTED_MODULE_10__["default"]
+}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+  path: "/groups/:id/edit",
+  component: _components_group_show__WEBPACK_IMPORTED_MODULE_9__["default"]
 })))), document.getElementById('app')); // serviceWorker.unregister();
 
 /***/ }),
@@ -86933,11 +87075,6 @@ __webpack_require__.r(__webpack_exports__);
 
     case _actions_index__WEBPACK_IMPORTED_MODULE_1__["CREATE_GROUP"]:
       console.log('CREATE_GROUPのろぐ');
-    // case READ_POSTS:
-    // console.log('READ_POSTSのろぐ')
-    // console.log(_.mapKeys(action.response.data.posts, 'id'))
-    // console.log('READ_POSTSのろぐ')
-    // return _.mapKeys(action.response.data.posts, 'id')
 
     default:
       return groups;
@@ -86991,7 +87128,12 @@ __webpack_require__.r(__webpack_exports__);
 
   switch (action.type) {
     case _actions_index__WEBPACK_IMPORTED_MODULE_1__["READ_POSTS"]:
-      return lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data.posts, 'id');
+      var data = {
+        'group_id': action.response.data.id,
+        'posts': lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data.posts, 'id')
+      }; // return _.mapKeys(action.response.data.posts, 'id')
+
+      return data;
 
     default:
       return posts;

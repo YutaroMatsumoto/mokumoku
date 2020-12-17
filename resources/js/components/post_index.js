@@ -16,9 +16,10 @@ class PostIndex extends Component {
         console.log(this.props.posts)
         return (
             <React.Fragment>
+                <Link to={`${this.props.posts.group_id}/edit`}>グループ情報を編集する</Link>
                 <table>
                     <tbody>
-                        {_.map(this.props.posts, post => (
+                        {_.map(this.props.posts.posts, post => (
                             <tr key={post.id}>
                                 <td>日付：{post.date}</td>
                                 <td>{post.title}</td>

@@ -39,7 +39,7 @@ class Top extends Component {
                         {/* <Items items={this.state.items}/> */}
                         {_.map(this.props.groups, group => (
                             <tr key={group.id}>
-                                <td><Link to={`/groups/${group.id}/posts`}>{group.name}</Link></td>
+                                <td><Link to={`/groups/${group.id}`}>{group.name}</Link></td>
                             </tr>
                         ))}
                     </tbody>
