@@ -65,7 +65,13 @@ class GroupController extends Controller
      */
     public function show($id)
     {
-        //
+        $group = Group::find($id);
+        logger('showファンクション');
+        logger('showファンクション');
+        logger($group);
+        logger('showファンクション');
+        logger('showファンクション');
+        return $group;
     }
 
     /**

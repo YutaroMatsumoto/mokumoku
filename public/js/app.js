@@ -86236,7 +86236,7 @@ module.exports = function(module) {
 /*!***************************************!*\
   !*** ./resources/js/actions/index.js ***!
   \***************************************/
-/*! exports provided: READ_GROUPS, CREATE_GROUP, READ_POSTS, readGroups, createGroup, readPosts */
+/*! exports provided: READ_GROUPS, CREATE_GROUP, READ_POSTS, GET_GROUP, readGroups, createGroup, readPosts, getGroup */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -86244,9 +86244,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "READ_GROUPS", function() { return READ_GROUPS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CREATE_GROUP", function() { return CREATE_GROUP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "READ_POSTS", function() { return READ_POSTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_GROUP", function() { return GET_GROUP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "readGroups", function() { return readGroups; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createGroup", function() { return createGroup; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "readPosts", function() { return readPosts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getGroup", function() { return getGroup; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -86264,7 +86266,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var READ_GROUPS = 'READ_GROUPS';
 var CREATE_GROUP = 'CREATE_GROUP';
-var READ_POSTS = 'READ_POSTS'; // viewのcomponent側で使用するため、exportする
+var READ_POSTS = 'READ_POSTS';
+var GET_GROUP = 'GET_GROUP'; // viewのcomponent側で使用するため、exportする
 // tunkによって、actionの代わりに関数を返すことができるようになっている
 
 var readGroups = function readGroups() {
@@ -86372,6 +86375,38 @@ var readPosts = function readPosts(id) {
 
     return function (_x3) {
       return _ref3.apply(this, arguments);
+    };
+  }();
+};
+var getGroup = function getGroup(id) {
+  return /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(dispatch) {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/show/".concat(id));
+
+            case 2:
+              response = _context4.sent;
+              console.log('えええええ');
+              console.log('えええええ');
+              console.log(response);
+              console.log('えええええ');
+              console.log('えええええ'); // dispatch({ type: GET_GROUP, response })
+
+            case 8:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function (_x4) {
+      return _ref4.apply(this, arguments);
     };
   }();
 };
@@ -86817,6 +86852,15 @@ var GroupShow = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(GroupShow, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var id = this.props.match.params.id;
+
+      if (id) {
+        this.props.getGroup(id);
+      }
+    }
+  }, {
     key: "renderField",
     value: function renderField(field) {
       var input = field.input,
@@ -86865,7 +86909,25 @@ var GroupShow = /*#__PURE__*/function (_Component) {
       // pristine: 入力されていないとtrueを返す。入力されているとfalseを返す。
       // submitting: 送信されるとtrueを返す。送信する前はfalseを返す。
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "\u30B0\u30EB\u30FC\u30D7\u7DE8\u96C6"));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "\u30B0\u30EB\u30FC\u30D7\u7DE8\u96C6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+        onSubmit: handleSubmit(this.onSubmit)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_3__["Field"], {
+        label: "\u30B0\u30EB\u30FC\u30D7\u540D",
+        name: "name",
+        type: "text",
+        component: this.renderField
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_3__["Field"], {
+        label: "\u8AAC\u660E",
+        name: "detail",
+        type: "text",
+        component: this.renderField
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "submit",
+        value: "Submit",
+        disabled: pristine || submitting
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+        to: "/"
+      }, "Cancel"))));
     }
   }]);
 
@@ -86878,13 +86940,25 @@ var validate = function validate(values) {
   if (!values.detail) errors.detail = "説明を入力してください。";
   console.log(errors);
   return errors;
-}; // const mapDispatchToProps = ({ postGroup })
+};
 
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var group = state.groups[ownProps.match.params.id];
+  return {
+    initialValues: group,
+    group: group
+  };
+};
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, null)(Object(redux_form__WEBPACK_IMPORTED_MODULE_3__["reduxForm"])({
+var mapDispatchToProps = {
+  getGroup: _actions_index__WEBPACK_IMPORTED_MODULE_5__["getGroup"]
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Object(redux_form__WEBPACK_IMPORTED_MODULE_3__["reduxForm"])({
   validate: validate,
-  form: 'groupShowForm'
-})(GroupShow)));
+  form: 'groupShowForm',
+  enableReinitialize: true
+})(GroupShow) // enableReinitializeはtrueにすると、initialValuesが変わるたびにformが初期化される
+));
 
 /***/ }),
 

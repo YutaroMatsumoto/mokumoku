@@ -5,6 +5,7 @@ import { get } from 'jquery'
 export const READ_GROUPS = 'READ_GROUPS'
 export const CREATE_GROUP = 'CREATE_GROUP'
 export const READ_POSTS = 'READ_POSTS'
+export const GET_GROUP = 'GET_GROUP'
 
 // viewのcomponent側で使用するため、exportする
 // tunkによって、actionの代わりに関数を返すことができるようになっている
@@ -39,4 +40,14 @@ export const readPosts = id => async dispatch => {
     console.log('ううううう')
 
     dispatch({ type: READ_POSTS, response })
+}
+
+export const getGroup = id => async dispatch => {
+    const response = await axios.get(`/api/show/${id}`)
+    console.log('えええええ')
+    console.log('えええええ')
+    console.log(response)
+    console.log('えええええ')
+    console.log('えええええ')
+    // dispatch({ type: GET_GROUP, response })
 }

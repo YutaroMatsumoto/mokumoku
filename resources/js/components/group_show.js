@@ -13,6 +13,13 @@ class GroupShow extends Component {
         this.onSubmit = this.onSubmit.bind(this)
     }
 
+    componentDidMount() {
+        const { id } = this.props.match.params
+        if(id) {
+            this.props.getGroup(id)   
+        }
+    }
+
     renderField(field) {
         const { input, label, type, meta: { touched, error } } = field
 
@@ -39,17 +46,16 @@ class GroupShow extends Component {
         return (
             <div>
                 <h1>グループ編集</h1>
-                {/* <form onSubmit={handleSubmit(this.onSubmit)}> */}
-                    {/* <div> */}
-                        {/* <Field label="グループ名" name="name" type="text" component={this.renderField}/> */}
-                        {/* <Field label="説明" name="detail" type="text" component={this.renderField}/> */}
-                        {/* <Field label="Name" name="name" type="text" component="input" placeholder="グループ名"/> */}
-                    {/* </div> */}
-                    {/* <div> */}
-                        {/* <input type="submit" value="Submit" disabled={pristine || submitting} /> */}
-                        {/* <Link to="/">Cancel</Link> */}
-                    {/* </div> */}
-                {/* </form> */}
+                <form onSubmit={handleSubmit(this.onSubmit)}>
+                    <div>
+                        <Field label="グループ名" name="name" type="text" component={this.renderField}/>
+                        <Field label="説明" name="detail" type="text" component={this.renderField}/>
+                    </div>
+                    <div>
+                        <input type="submit" value="Submit" disabled={pristine || submitting} />
+                        <Link to="/">Cancel</Link>
+                    </div>
+                </form>
             </div>
             
 
@@ -67,8 +73,14 @@ const validate = values => {
     return errors
 }
 
-// const mapDispatchToProps = ({ postGroup })
+const mapStateToProps = (state, ownProps) => {
+    const group = state.groups[ownProps.match.params.id]
+    return { initialValues: group, group }
+}
 
-export default connect(null, null)(
-    reduxForm({ validate, form: 'groupShowForm' })(GroupShow)
+const mapDispatchToProps = ({ getGroup })
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+    reduxForm({ validate, form: 'groupShowForm', enableReinitialize: true })(GroupShow)
+    // enableReinitializeはtrueにすると、initialValuesが変わるたびにformが初期化される
 )
