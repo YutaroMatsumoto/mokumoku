@@ -13,13 +13,21 @@ class PostIndex extends Component {
     }
 
     render() {
-        console.log(this.props.posts)
+        console.log('ををを')
+        console.log('ををを')
+        // console.log(this.props.group_posts)
+        const { group_posts } = this.props
+        console.log('ををを')
+        console.log('ををを')
         return (
             <React.Fragment>
-                <Link to={`${this.props.posts.group_id}/edit`}>グループ情報を編集する</Link>
+                <p>グループ情報</p>
+                <p>グループ名：{group_posts.group_name}</p>
+                <p>グループ詳細：{group_posts.group_detail}</p>
+                <Link to={`${group_posts.group_id}/edit`}>グループ情報を編集する</Link>
                 <table>
                     <tbody>
-                        {_.map(this.props.posts.posts, post => (
+                        {_.map(group_posts.posts, post => (
                             <tr key={post.id}>
                                 <td>日付：{post.date}</td>
                                 <td>{post.title}</td>
@@ -33,7 +41,7 @@ class PostIndex extends Component {
     }
 }
 
-const mapStateToProps = state => ({ posts: state.posts })
+const mapStateToProps = state => ({ group_posts: state.groups })
 
 const mapDispatchToProps = ({ readPosts })
 

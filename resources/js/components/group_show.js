@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { Link }　from 'react-router-dom'
 
-import { getGroup, deleteGroup, putGroup } from '../actions/index'
+import { getGroup, deleteGroup, updateGroup } from '../actions/index'
 // この画面は、グループの取得、作成、削除ができる
 
 // class内で使用するpropsは、mapStateToPropsで定義したもの
@@ -35,8 +35,10 @@ class GroupShow extends Component {
     }
 
     async onSubmit(values) {
-        // await this.props.postGroup(values)
-        this.props.history.push('/')
+        await this.props.updateGroup(values)
+
+        // updateGroupを実行したら、投稿一覧画面へ戻る
+        this.props.history.push(`/groups/${values.id}`)
     }
 
     render() {
@@ -80,7 +82,7 @@ const mapStateToProps = (state, ownProps) => {
     return { initialValues: group }
 }
 
-const mapDispatchToProps = ({ getGroup })
+const mapDispatchToProps = ({ getGroup, updateGroup })
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({ validate, form: 'groupShowForm', enableReinitialize: true })(GroupShow)

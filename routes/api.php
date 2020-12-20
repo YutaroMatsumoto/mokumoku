@@ -34,9 +34,12 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::group(['middleware' => 'api'], function() {
+	// グループ
 	Route::get('get', 'App\Http\Controllers\GroupController@index');
 	Route::post('add', 'App\Http\Controllers\GroupController@create');
-	// Route::post('edit', 'App\Http\Controllers\GroupController@edit');
+	Route::post('update/{id}', 'App\Http\Controllers\GroupController@update');
 	Route::get('show/{id}', 'App\Http\Controllers\GroupController@show');
+
+	// 投稿
 	Route::get('getposts/{id}', 'App\Http\Controllers\PostController@index');
 });

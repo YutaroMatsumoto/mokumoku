@@ -94,7 +94,20 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $group = Group::find($id);
+
+        $group->name = $request->input('name');
+        $group->detail = $request->input('detail');
+        $group->save();
+
+        $updated_group = Group::with('posts')->find($id);
+        logger('updateごのグループ？？');
+        logger('updateごのグループ？？');
+        logger($updated_group);
+        logger('updateごのグループ？？');
+        logger('updateごのグループ？？');
+
+        return $updated_group;
     }
 
     /**

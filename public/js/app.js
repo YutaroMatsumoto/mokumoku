@@ -86236,7 +86236,7 @@ module.exports = function(module) {
 /*!***************************************!*\
   !*** ./resources/js/actions/index.js ***!
   \***************************************/
-/*! exports provided: READ_GROUPS, CREATE_GROUP, READ_POSTS, GET_GROUP, readGroups, createGroup, readPosts, getGroup */
+/*! exports provided: READ_GROUPS, CREATE_GROUP, READ_POSTS, GET_GROUP, UPDATE_GROUP, readGroups, createGroup, readPosts, getGroup, updateGroup */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -86245,10 +86245,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CREATE_GROUP", function() { return CREATE_GROUP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "READ_POSTS", function() { return READ_POSTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_GROUP", function() { return GET_GROUP; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_GROUP", function() { return UPDATE_GROUP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "readGroups", function() { return readGroups; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createGroup", function() { return createGroup; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "readPosts", function() { return readPosts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getGroup", function() { return getGroup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateGroup", function() { return updateGroup; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -86267,7 +86269,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var READ_GROUPS = 'READ_GROUPS';
 var CREATE_GROUP = 'CREATE_GROUP';
 var READ_POSTS = 'READ_POSTS';
-var GET_GROUP = 'GET_GROUP'; // viewのcomponent側で使用するため、exportする
+var GET_GROUP = 'GET_GROUP';
+var UPDATE_GROUP = 'UPDATE_GROUP'; // viewのcomponent側で使用するため、exportする
 // tunkによって、actionの代わりに関数を返すことができるようになっている
 
 var readGroups = function readGroups() {
@@ -86345,12 +86348,17 @@ var readPosts = function readPosts(id) {
 
             case 2:
               response = _context3.sent;
+              console.log('readpostのレスポンス');
+              console.log('readpostのレスポンス');
+              console.log(response);
+              console.log('readpostのレスポンス');
+              console.log('readpostのレスポンス');
               dispatch({
                 type: READ_POSTS,
                 response: response
               });
 
-            case 4:
+            case 9:
             case "end":
               return _context3.stop();
           }
@@ -86391,6 +86399,39 @@ var getGroup = function getGroup(id) {
 
     return function (_x4) {
       return _ref4.apply(this, arguments);
+    };
+  }();
+}; // グループの編集処理
+
+var updateGroup = function updateGroup(values) {
+  return /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(dispatch) {
+      var id, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              id = values.id;
+              _context5.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/update/".concat(id), values);
+
+            case 3:
+              response = _context5.sent;
+              dispatch({
+                type: UPDATE_GROUP,
+                response: response
+              });
+
+            case 5:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    return function (_x5) {
+      return _ref5.apply(this, arguments);
     };
   }();
 };
@@ -86869,10 +86910,17 @@ var GroupShow = /*#__PURE__*/function (_Component) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                // await this.props.postGroup(values)
-                this.props.history.push('/');
+                _context.next = 2;
+                return this.props.updateGroup(values);
 
-              case 1:
+              case 2:
+                this.props.history.push("/groups/".concat(values.id));
+                console.log('values');
+                console.log(values);
+                console.log('values');
+                console.log(this.props.history);
+
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -86930,25 +86978,17 @@ var validate = function validate(values) {
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   // stateには、一つ前の画面で利用したaction(readPosts)によりがdispatchされた値？が入っている ← おそらくこれは、このコンポーネントでactionを読んでいなかったため
-  console.log('stateを表示');
-  console.log(state);
-  console.log('------------------');
-  console.log('ownpropsを表示');
-  console.log(ownProps);
-  console.log('------------------');
-  var group = state.groups[ownProps.match.params.id];
-  console.log('groupをひょうじ');
-  console.log(group);
-  console.log('groupをひょうじ'); // initialValuesを使わないとfieldに値が入らない
+  // initialValuesを使わないとfieldに値が入らない
   // initialValuesは、input.valuesのこと？
-
+  var group = state.groups[ownProps.match.params.id];
   return {
     initialValues: group
-  }; // return {group: group, group}
+  };
 };
 
 var mapDispatchToProps = {
-  getGroup: _actions_index__WEBPACK_IMPORTED_MODULE_5__["getGroup"]
+  getGroup: _actions_index__WEBPACK_IMPORTED_MODULE_5__["getGroup"],
+  updateGroup: _actions_index__WEBPACK_IMPORTED_MODULE_5__["updateGroup"]
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Object(redux_form__WEBPACK_IMPORTED_MODULE_3__["reduxForm"])({
   validate: validate,
@@ -87026,10 +87066,15 @@ var PostIndex = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(this.props.posts);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
-        to: "".concat(this.props.posts.group_id, "/edit")
-      }, "\u30B0\u30EB\u30FC\u30D7\u60C5\u5831\u3092\u7DE8\u96C6\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, lodash__WEBPACK_IMPORTED_MODULE_3___default.a.map(this.props.posts.posts, function (post) {
+      console.log('ををを');
+      console.log('ををを'); // console.log(this.props.group_posts)
+
+      var group_posts = this.props.group_posts;
+      console.log('ををを');
+      console.log('ををを');
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "\u30B0\u30EB\u30FC\u30D7\u60C5\u5831"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "\u30B0\u30EB\u30FC\u30D7\u540D\uFF1A", group_posts.group_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "\u30B0\u30EB\u30FC\u30D7\u8A73\u7D30\uFF1A", group_posts.group_detail), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+        to: "".concat(group_posts.group_id, "/edit")
+      }, "\u30B0\u30EB\u30FC\u30D7\u60C5\u5831\u3092\u7DE8\u96C6\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, lodash__WEBPACK_IMPORTED_MODULE_3___default.a.map(group_posts.posts, function (post) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: post.id
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u65E5\u4ED8\uFF1A", post.date), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, post.title));
@@ -87042,7 +87087,7 @@ var PostIndex = /*#__PURE__*/function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    posts: state.posts
+    group_posts: state.groups
   };
 };
 
@@ -87150,8 +87195,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log('READ_GROUPSのろぐ');
       console.log(lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data, 'id'));
       return lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data, 'id');
-    // case READ_POSTS:
-    // return { 'id': action.response.data.id, 'name': action.response.data.name, 'detail': action.response.data.detail }
 
     case _actions_index__WEBPACK_IMPORTED_MODULE_1__["CREATE_GROUP"]:
       console.log('CREATE_GROUPのろぐ');
@@ -87159,6 +87202,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     case _actions_index__WEBPACK_IMPORTED_MODULE_1__["GET_GROUP"]:
       var data = action.response.data;
       return _objectSpread(_objectSpread({}, groups), {}, _defineProperty({}, data.id, data));
+      console.log('CREATE_GROUPのろぐ');
+
+    case _actions_index__WEBPACK_IMPORTED_MODULE_1__["READ_POSTS"]:
+    case _actions_index__WEBPACK_IMPORTED_MODULE_1__["UPDATE_GROUP"]:
+      var datas = action.response.data;
+      var return_data = {
+        'group_id': datas.id,
+        'group_name': datas.name,
+        'group_detail': datas.detail,
+        'posts': lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(datas.posts, 'id')
+      };
+      return return_data;
 
     default:
       return groups;
@@ -87179,49 +87234,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-form */ "./node_modules/redux-form/es/index.js");
 /* harmony import */ var _groups__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./groups */ "./resources/js/reducers/groups.js");
-/* harmony import */ var _posts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./posts */ "./resources/js/reducers/posts.js");
 
 
-
+ // import posts from './posts'
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   groups: _groups__WEBPACK_IMPORTED_MODULE_2__["default"],
-  posts: _posts__WEBPACK_IMPORTED_MODULE_3__["default"],
   form: redux_form__WEBPACK_IMPORTED_MODULE_1__["reducer"]
 }));
-
-/***/ }),
-
-/***/ "./resources/js/reducers/posts.js":
-/*!****************************************!*\
-  !*** ./resources/js/reducers/posts.js ***!
-  \****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _actions_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/index */ "./resources/js/actions/index.js");
-
-
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  var posts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case _actions_index__WEBPACK_IMPORTED_MODULE_1__["READ_POSTS"]:
-      var data = {
-        'group_id': action.response.data.id,
-        'posts': lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data.posts, 'id')
-      };
-      return data;
-
-    default:
-      return posts;
-  }
-});
 
 /***/ }),
 
