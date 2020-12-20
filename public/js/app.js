@@ -86283,17 +86283,12 @@ var readGroups = function readGroups() {
 
             case 2:
               response = _context.sent;
-              console.log('あああああ');
-              console.log('あああああ');
-              console.log(response);
-              console.log('あああああ');
-              console.log('あああああ');
               dispatch({
                 type: READ_GROUPS,
                 response: response
               }); // reducerに渡す。これにより、actionはtype, responseのkeyをもつ
 
-            case 9:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -86319,17 +86314,12 @@ var createGroup = function createGroup(values) {
 
             case 2:
               response = _context2.sent;
-              console.log('いいいいい');
-              console.log('いいいいい');
-              console.log(response);
-              console.log('いいいいい');
-              console.log('いいいいい');
               dispatch({
                 type: CREATE_GROUP,
                 response: response
               }); // reducerに渡す。これにより、actionはtype, responseのkeyをもつ
 
-            case 9:
+            case 4:
             case "end":
               return _context2.stop();
           }
@@ -86355,17 +86345,12 @@ var readPosts = function readPosts(id) {
 
             case 2:
               response = _context3.sent;
-              console.log('ううううう');
-              console.log('ううううう');
-              console.log(response);
-              console.log('ううううう');
-              console.log('ううううう');
               dispatch({
                 type: READ_POSTS,
                 response: response
               });
 
-            case 9:
+            case 4:
             case "end":
               return _context3.stop();
           }
@@ -86391,13 +86376,12 @@ var getGroup = function getGroup(id) {
 
             case 2:
               response = _context4.sent;
-              console.log('えええええ');
-              console.log('えええええ');
-              console.log(response);
-              console.log('えええええ');
-              console.log('えええええ'); // dispatch({ type: GET_GROUP, response })
+              dispatch({
+                type: GET_GROUP,
+                response: response
+              });
 
-            case 8:
+            case 4:
             case "end":
               return _context4.stop();
           }
@@ -86834,6 +86818,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
  // この画面は、グループの取得、作成、削除ができる
+// class内で使用するpropsは、mapStateToPropsで定義したもの
 
 var GroupShow = /*#__PURE__*/function (_Component) {
   _inherits(GroupShow, _Component);
@@ -86859,10 +86844,12 @@ var GroupShow = /*#__PURE__*/function (_Component) {
       if (id) {
         this.props.getGroup(id);
       }
-    }
+    } // renderField({input, label, type, meta: { touched, error }}) {
+
   }, {
     key: "renderField",
     value: function renderField(field) {
+      // inputのnameと一致するkeyをもつstateをinput.valuesに入れている？
       var input = field.input,
           label = field.label,
           type = field.type,
@@ -86938,16 +86925,26 @@ var validate = function validate(values) {
   var errors = {};
   if (!values.name) errors.name = "グループ名を入力してください。";
   if (!values.detail) errors.detail = "説明を入力してください。";
-  console.log(errors);
   return errors;
 };
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  // stateには、一つ前の画面で利用したaction(readPosts)によりがdispatchされた値？が入っている ← おそらくこれは、このコンポーネントでactionを読んでいなかったため
+  console.log('stateを表示');
+  console.log(state);
+  console.log('------------------');
+  console.log('ownpropsを表示');
+  console.log(ownProps);
+  console.log('------------------');
   var group = state.groups[ownProps.match.params.id];
+  console.log('groupをひょうじ');
+  console.log(group);
+  console.log('groupをひょうじ'); // initialValuesを使わないとfieldに値が入らない
+  // initialValuesは、input.valuesのこと？
+
   return {
-    initialValues: group,
-    group: group
-  };
+    initialValues: group
+  }; // return {group: group, group}
 };
 
 var mapDispatchToProps = {
@@ -86958,6 +86955,7 @@ var mapDispatchToProps = {
   form: 'groupShowForm',
   enableReinitialize: true
 })(GroupShow) // enableReinitializeはtrueにすると、initialValuesが変わるたびにformが初期化される
+// componentdirMountが実行される前と後ではstateが異なることがあるため、enableReinitializeをtrueにしておく必要がある
 ));
 
 /***/ }),
@@ -87133,6 +87131,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _actions_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/index */ "./resources/js/actions/index.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
@@ -87146,9 +87150,15 @@ __webpack_require__.r(__webpack_exports__);
       console.log('READ_GROUPSのろぐ');
       console.log(lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data, 'id'));
       return lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data, 'id');
+    // case READ_POSTS:
+    // return { 'id': action.response.data.id, 'name': action.response.data.name, 'detail': action.response.data.detail }
 
     case _actions_index__WEBPACK_IMPORTED_MODULE_1__["CREATE_GROUP"]:
       console.log('CREATE_GROUPのろぐ');
+
+    case _actions_index__WEBPACK_IMPORTED_MODULE_1__["GET_GROUP"]:
+      var data = action.response.data;
+      return _objectSpread(_objectSpread({}, groups), {}, _defineProperty({}, data.id, data));
 
     default:
       return groups;
@@ -87205,8 +87215,7 @@ __webpack_require__.r(__webpack_exports__);
       var data = {
         'group_id': action.response.data.id,
         'posts': lodash__WEBPACK_IMPORTED_MODULE_0___default.a.mapKeys(action.response.data.posts, 'id')
-      }; // return _.mapKeys(action.response.data.posts, 'id')
-
+      };
       return data;
 
     default:

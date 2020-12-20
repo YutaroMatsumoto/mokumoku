@@ -11,43 +11,20 @@ export const GET_GROUP = 'GET_GROUP'
 // tunkによって、actionの代わりに関数を返すことができるようになっている
 export const readGroups = () => async dispatch => {
     const response =  await axios.get('/api/get')
-    console.log('あああああ')
-    console.log('あああああ')
-    console.log(response)
-    console.log('あああああ')
-    console.log('あああああ')
-
     dispatch({ type: READ_GROUPS, response }) // reducerに渡す。これにより、actionはtype, responseのkeyをもつ
 }
 
 export const createGroup = values => async dispatch => {
     const response =  await axios.post('/api/add', values)
-    console.log('いいいいい')
-    console.log('いいいいい')
-    console.log(response)
-    console.log('いいいいい')
-    console.log('いいいいい')
-
     dispatch({ type: CREATE_GROUP, response }) // reducerに渡す。これにより、actionはtype, responseのkeyをもつ
 }
 
 export const readPosts = id => async dispatch => {
     const response =  await axios.get(`/api/getposts/${id}`)
-    console.log('ううううう')
-    console.log('ううううう')
-    console.log(response)
-    console.log('ううううう')
-    console.log('ううううう')
-
     dispatch({ type: READ_POSTS, response })
 }
 
 export const getGroup = id => async dispatch => {
     const response = await axios.get(`/api/show/${id}`)
-    console.log('えええええ')
-    console.log('えええええ')
-    console.log(response)
-    console.log('えええええ')
-    console.log('えええええ')
-    // dispatch({ type: GET_GROUP, response })
+    dispatch({ type: GET_GROUP, response })
 }

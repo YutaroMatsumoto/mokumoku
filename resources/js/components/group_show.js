@@ -6,6 +6,7 @@ import { Link }　from 'react-router-dom'
 import { getGroup, deleteGroup, putGroup } from '../actions/index'
 // この画面は、グループの取得、作成、削除ができる
 
+// class内で使用するpropsは、mapStateToPropsで定義したもの
 
 class GroupShow extends Component {
     constructor(props) { // initializeしたときにbind
@@ -20,9 +21,10 @@ class GroupShow extends Component {
         }
     }
 
+    // renderField({input, label, type, meta: { touched, error }}) {
     renderField(field) {
+        // inputのnameと一致するkeyをもつstateをinput.valuesに入れている？
         const { input, label, type, meta: { touched, error } } = field
-
         return (
             <div>
                 <label>{label}</label>
@@ -65,17 +67,17 @@ class GroupShow extends Component {
 
 const validate = values => {
     const errors = {}
-
     if (!values.name) errors.name = "グループ名を入力してください。"
     if (!values.detail) errors.detail = "説明を入力してください。"
-
-    console.log(errors)
     return errors
 }
 
 const mapStateToProps = (state, ownProps) => {
+    // stateには、一つ前の画面で利用したaction(readPosts)によりがdispatchされた値？が入っている ← おそらくこれは、このコンポーネントでactionを読んでいなかったため
+    // initialValuesを使わないとfieldに値が入らない
+    // initialValuesは、input.valuesのこと？
     const group = state.groups[ownProps.match.params.id]
-    return { initialValues: group, group }
+    return { initialValues: group }
 }
 
 const mapDispatchToProps = ({ getGroup })
@@ -83,4 +85,5 @@ const mapDispatchToProps = ({ getGroup })
 export default connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({ validate, form: 'groupShowForm', enableReinitialize: true })(GroupShow)
     // enableReinitializeはtrueにすると、initialValuesが変わるたびにformが初期化される
+    // componentdirMountが実行される前と後ではstateが異なることがあるため、enableReinitializeをtrueにしておく必要がある
 )
