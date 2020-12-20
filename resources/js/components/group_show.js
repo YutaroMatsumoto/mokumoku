@@ -49,7 +49,7 @@ class GroupShow extends Component {
         
         return (
             <div>
-                <h1>グループ編集</h1>
+                <h1>勉強会グループ編集</h1>
                 <form onSubmit={handleSubmit(this.onSubmit)}>
                     <div>
                         <Field label="グループ名" name="name" type="text" component={this.renderField}/>
