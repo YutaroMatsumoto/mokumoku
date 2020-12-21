@@ -86914,13 +86914,10 @@ var GroupShow = /*#__PURE__*/function (_Component) {
                 return this.props.updateGroup(values);
 
               case 2:
+                // updateGroupを実行したら、投稿一覧画面へ戻る
                 this.props.history.push("/groups/".concat(values.id));
-                console.log('values');
-                console.log(values);
-                console.log('values');
-                console.log(this.props.history);
 
-              case 7:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -86944,7 +86941,7 @@ var GroupShow = /*#__PURE__*/function (_Component) {
       // pristine: 入力されていないとtrueを返す。入力されているとfalseを返す。
       // submitting: 送信されるとtrueを返す。送信する前はfalseを返す。
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "\u30B0\u30EB\u30FC\u30D7\u7DE8\u96C6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "\u52C9\u5F37\u4F1A\u30B0\u30EB\u30FC\u30D7\u7DE8\u96C6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
         onSubmit: handleSubmit(this.onSubmit)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_3__["Field"], {
         label: "\u30B0\u30EB\u30FC\u30D7\u540D",
@@ -87066,13 +87063,10 @@ var PostIndex = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log('ををを');
-      console.log('ををを'); // console.log(this.props.group_posts)
-
       var group_posts = this.props.group_posts;
-      console.log('ををを');
-      console.log('ををを');
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "\u30B0\u30EB\u30FC\u30D7\u60C5\u5831"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "\u30B0\u30EB\u30FC\u30D7\u540D\uFF1A", group_posts.group_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "\u30B0\u30EB\u30FC\u30D7\u8A73\u7D30\uFF1A", group_posts.group_detail), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "\u30B0\u30EB\u30FC\u30D7\u60C5\u5831"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "\u30B0\u30EB\u30FC\u30D7\u540D\uFF1A", group_posts.group_name ? group_posts.group_name : ''), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "\u30B0\u30EB\u30FC\u30D7\u8A73\u7D30\uFF1A", group_posts.group_detail ? group_posts.group_detail : ''), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+        to: "/"
+      }, "\u623B\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
         to: "".concat(group_posts.group_id, "/edit")
       }, "\u30B0\u30EB\u30FC\u30D7\u60C5\u5831\u3092\u7DE8\u96C6\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, lodash__WEBPACK_IMPORTED_MODULE_3___default.a.map(group_posts.posts, function (post) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
