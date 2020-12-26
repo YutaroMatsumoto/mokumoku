@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { get } from 'jquery'
 
 // reducerで利用するため、export
 export const READ_GROUPS = 'READ_GROUPS'

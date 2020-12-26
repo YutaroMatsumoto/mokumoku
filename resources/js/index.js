@@ -9,7 +9,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import Top from './components/Top'
 import GroupNew from './components/group_new'
 import GroupShow from './components/group_show'
-import PostIndex from './components/post_index'
+import { PostIndex } from './components/post_index'
 import reducer from './reducers/index'
 // import * as serviceWorker from './serviceWorker';
 

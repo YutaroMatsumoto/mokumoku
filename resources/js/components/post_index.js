@@ -1,21 +1,51 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import Items from './Items'
-import { connect } from 'react-redux'
+import { connect, useSelector, useDispatch } from 'react-redux'
 import _ from 'lodash'
 import { Link }　from 'react-router-dom'
 
 import { readPosts } from '../actions/index'
 
-class PostIndex extends Component {
-    componentDidMount() {
-        const { id } = this.props.match.params
-        this.props.readPosts(id)
-    }
+// componentDidMount() {
+// const { id } = this.props.match.params
+// this.props.readPosts(id)
+// }
 
-    render() {
-        const { group_posts } = this.props
-        return (
-            <React.Fragment>
+export const PostIndex = (props) => {
+
+    const dispatch = useDispatch()
+
+
+    /**  useeffectを利用せず、以下だけでreadpostを実行しようとするの、無限にrequestが発生する  **/
+    // readPosts(id)
+    // dispatch(readPosts(id))
+    /** **/
+
+    const { id } = props.match.params
+    useEffect(() => {
+        dispatch(readPosts(id))
+    },[id])
+
+    const group_posts = useSelector(state => state.groups)
+
+    // const a = props
+    // const { group_posts } = props
+    // console.log('aaa')
+    // console.log(props)
+    // console.log('aaa')
+    // console.log('postsをひょうじする')
+    // console.log('postsをひょうじする')
+    // console.log(group_posts.posts)
+    // console.log('postsをひょうじする')
+    // console.log('postsをひょうじする')
+    // const check = Object.keys(group_posts.posts).length
+    // if(group_posts.posts) {
+        // console.log('投稿あり')
+    // } else {
+        // console.log('投稿なし')
+    // }
+    return (
+        <React.Fragment>
                 <p>グループ情報</p>
                 <p>グループ名：{group_posts.group_name ? group_posts.group_name : '' }</p>
                 <p>グループ詳細：{group_posts.group_detail ? group_posts.group_detail : '' }</p>
@@ -32,14 +62,12 @@ class PostIndex extends Component {
                         
                     </tbody>
                 </table>
-            </React.Fragment>
-        )
-    }
+        </React.Fragment>
+    )
 }
 
-const mapStateToProps = state => ({ group_posts: state.groups })
+// const mapStateToProps = state => ({ group_posts: state.groups })
 
-const mapDispatchToProps = ({ readPosts })
+// const mapDispatchToProps = ({ readPosts })
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostIndex);
+// export default connect(mapStateToProps, mapDispatchToProps)(PostIndex);
