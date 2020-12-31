@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { useForm } from 'react-hook-form'
+
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { Link }　from 'react-router-dom'
@@ -29,6 +31,10 @@ class GroupNew extends Component {
     }
 
     render() {
+        console.log('useformを表示')
+        console.log(useForm)
+        console.log('useformを表示')
+
         const { handleSubmit, pristine, submitting } = this.props
         // 上記について）renderしたときにとってくる？
         // pristine: 入力されていないとtrueを返す。入力されているとfalseを返す。

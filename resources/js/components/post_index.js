@@ -51,6 +51,7 @@ export const PostIndex = (props) => {
                 <p>グループ詳細：{group_posts.group_detail ? group_posts.group_detail : '' }</p>
                 <Link to='/'>戻る</Link>
                 <Link to={`${group_posts.group_id}/edit`}>グループ情報を編集する</Link>
+                <Link to={`${group_posts.group_id}/post/new`}>投稿</Link>
                 <table>
                     <tbody>
                         {_.map(group_posts.posts, post => (

@@ -22,11 +22,6 @@ export const createGroup = values => async dispatch => {
 
 export const readPosts = id => async dispatch => {
     const response =  await axios.get(`/api/getposts/${id}`)
-    console.log('readpostのレスポンス')
-    console.log('readpostのレスポンス')
-    console.log(response)
-    console.log('readpostのレスポンス')
-    console.log('readpostのレスポンス')
     dispatch({ type: READ_POSTS, response })
 }
 
@@ -40,4 +35,9 @@ export const updateGroup = values => async dispatch => {
     const id = values.id
     const response = await axios.post(`/api/update/${id}`, values)
     dispatch({ type: UPDATE_GROUP, response })
+}
+
+export const createPost = values => async dispatch => {
+    const response =  await axios.post('/api/add', values)
+    dispatch({ type: CREATE_GROUP, response }) // reducerに渡す。これにより、actionはtype, responseのkeyをもつ
 }
