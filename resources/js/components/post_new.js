@@ -3,13 +3,13 @@ import { useForm, Controller } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
 // import { Box, Grid, makeStyles, InputBase } from '@material-ui/core';
 
-import { connect } from 'react-redux'
-// import { Field, reduxForm } from 'redux-form'
+import { useDispatch } from 'react-redux'
 import { Link }　from 'react-router-dom'
 
 import { createPost } from '../actions/index'
-import { Button, TextField } from '@material-ui/core'
-
+import { Button, TextField, Container } from '@material-ui/core'
+import { Alert, AlertTitle } from '@material-ui/lab';
+import { submit } from 'redux-form'
 
     // renderField(field) {
         // const { input, label, type, meta: { touched, error } } = field
@@ -24,7 +24,11 @@ import { Button, TextField } from '@material-ui/core'
 
 // class PostNew extends Component {
 export const PostNew = (props) => {
+    const style = { margin: 12 }
+
+
     const { id } = props.match.params
+    const back = `/groups/${id}`
     // constructor(props) { // initializeしたときにbind
         // super(props)
         // this.onSubmit = this.onSubmit.bind(this)
@@ -39,97 +43,85 @@ export const PostNew = (props) => {
         // 上記について）renderしたときにとってくる？
         // pristine: 入力されていないとtrueを返す。入力されているとfalseを返す。
         // submitting: 送信されるとtrueを返す。送信する前はfalseを返す。
-    const { register, handleSubmit, watch, errors, control } = useForm()
+    const { handleSubmit, errors, control, formState: { isDirty, isSubmitting } } = useForm()
+    const dispatch = useDispatch()
+
+    const onSubmit = (data) => { 
+        dispatch(createPost(data))
+        props.history.push(back)
+    }
     console.log('errorsをひょうじ')
     console.log(errors)
-    // console.log(control)
     console.log('errorsをひょうじ')
-    // console.log('onsubmitをひょうじする')
-    const onSubmit = (data) => { console.log(data) };
-    console.log('onsubmitをひょうじする')
+    console.log('isdirtyをひょうじ')
+    console.log(isDirty)
+    console.log('isdirtyをひょうじ')
+    console.log('issubmittedをひょうじ')
+    console.log(isSubmitting)
+    console.log('issubmittedをひょうじ')
 
     return (
-        <div>
+        <Container maxWidth="sm">
             <h1>投稿画面</h1>
             {/* <form onSubmit={handleSubmit(this.onSubmit)}> */}
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <div>
                         <Controller
-                          as={<TextField />}
+                          error={errors.title ? true : false}
+                          as={<TextField 
+                            label="タイトル"
+                            variant="outlined"
+                            helperText={errors.title ? errors.title.message : false}
+                            fullWidth={true}/>}
                           name="title"
                           placeholder="タイトル"
                         //   ref={ register({required: 'タイトルは必須です。'}) }
                           defaultValue=""
                           control={control}
-                          rules={{required: 'タイトルは必須です。'}}
+                          rules={{required: 'タイトルは必須です。', maxLength: {value: 250, message: '文字数は250文字以下になるようにしてください。'}}}
                         />
-                        <ErrorMessage errors={errors} name="title"/>
-                    </div>
-
+                        {/* <ErrorMessage errors={errors} name="title" as={<Alert severity="warning"><AlertTitle></AlertTitle></Alert>}/> */}
+                        {/* <ErrorMessage errors={errors} name="title"/> */}
+                    </div><br/>
 
                     <div>
                         <Controller
-                          as={<TextField />}
+                          error={errors.content ? true : false}
+                          as={<TextField
+                            label="内容"
+                            multiline
+                            variant="outlined"
+                            helperText={errors.content ? errors.content.message : false}
+                            fullWidth={true}
+                            rows={5}/>}
                           name="content"
                           placeholder="内容"
                           defaultValue=""
                           control={control}
-                          rules={{required: '内容は必須です。', maxLength: {value: 5, message: '文字数は2000文字以下になるようにしてください。'}}}
+                          rules={{required: '内容は必須です。', maxLength: {value: 2000, message: '文字数は2000文字以下になるようにしてください。'}}}
                         />
-                        <ErrorMessage errors={errors} name="content"/>
+                        {/* <ErrorMessage errors={errors} name="content" as={<Alert severity="warning"><AlertTitle></AlertTitle></Alert>}/> */}
                     </div>
                 </div>
                 <div>
                     {/* <input type="submit" value="Submit" disabled={pristine || submitting} /> */}
-                    <Controller
-                      as={<Button color="primary"><span>送信</span></Button>}
-                      name="submit"
-                      control={control}
-                      defaultValue=""
+                    <Button
+                      variant="contained"
+                      color="primary"
                       onClick={handleSubmit(onSubmit)}
-                    />
-                    {/* <input type="submit" value="Submit"  /> */}
-                    <Link to="/">Cancel</Link>
+                      style={style}
+                      disabled={!isDirty || isSubmitting}
+                    >送信</Button>
+                    <Button
+                      variant="contained"
+                      component={Link}
+                      to={back}
+                      style={style}
+                    >戻る</Button>
                 </div>
             </form>
             
-        </div>
+        </Container>
     )
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-
-    
-    
-
-    
-    
 }
-
-// const validate = values => {
-    // const errors = {}
-// 
-    // if (!values.title) errors.name = "タイトルを入力してください。"
-    // if (!values.date) errors.detail = "日付を入力してください。"
-    // if (!values.content) errors.detail = "内容を入力してください。"
-// 
-    // console.log(errors)
-    // return errors
-// }
-// 
-// const mapDispatchToProps = ({ createPost })
-// 
-// export default connect(null, mapDispatchToProps)(PostNew)
-// export default connect(null, mapDispatchToProps)(
-//    reduxForm({ validate, form: 'postNewForm' })(PostNew)
-// )

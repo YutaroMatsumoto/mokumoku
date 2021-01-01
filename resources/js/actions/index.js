@@ -38,6 +38,9 @@ export const updateGroup = values => async dispatch => {
 }
 
 export const createPost = values => async dispatch => {
-    const response =  await axios.post('/api/add', values)
-    dispatch({ type: CREATE_GROUP, response }) // reducerに渡す。これにより、actionはtype, responseのkeyをもつ
+    console.log('actionはうごいているよ')
+    console.log('actionはうごいているよ')
+    // const id = values.id
+    // const response =  await axios.post('/api/add', values)
+    // dispatch({ type: CREATE_GROUP, response }) // reducerに渡す。これにより、actionはtype, responseのkeyをもつ
 }

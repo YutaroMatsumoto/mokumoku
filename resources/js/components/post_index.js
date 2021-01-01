@@ -1,6 +1,6 @@
 import React, { Component, useEffect } from 'react';
 import Items from './Items'
-import { connect, useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import _ from 'lodash'
 import { Link }　from 'react-router-dom'
 
