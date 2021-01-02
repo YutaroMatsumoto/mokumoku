@@ -42,6 +42,7 @@ class GroupController extends Controller
         $group->detail = $request->input('detail');
         $group->save();
 
+        // ここは、後ほどユーザーに紐づくグループを取得する処理に修正が必要
         $groups = Group::all();
         return $groups;
     }

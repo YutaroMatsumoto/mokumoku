@@ -34,14 +34,19 @@ class PostController extends Controller
         logger($request);
         logger('リクエストの中身を表示');
         logger('リクエストの中身を表示');
-        // $group = new Group;
-        // $group->user_id = 1;
-        // $group->name = $request->input('name');
-        // $group->detail = $request->input('detail');
-        // $group->save();
 
-        // $groups = Group::all();
-        // return $groups;
+        $today = date('Y-m-d');
+        $post = new Post;
+        $post->user_id = 1;
+        $post->group_id = $request->input('group_id');
+        $post->title = $request->input('title');
+        $post->date = $today;
+        $post->content = $request->input('content');
+
+        $post->save();
+        return;
+        // $posts = post::all();
+        // return $posts;
     }
 
     /**

@@ -42,5 +42,5 @@ Route::group(['middleware' => 'api'], function() {
 
 	// 投稿
 	Route::get('getposts/{id}', 'App\Http\Controllers\PostController@index');
-	Route::get('addPost', 'App\Http\Controllers\PostController@create');
+	Route::post('addPost', 'App\Http\Controllers\PostController@create');
 });

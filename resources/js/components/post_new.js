@@ -24,41 +24,17 @@ import { submit } from 'redux-form'
 
 // class PostNew extends Component {
 export const PostNew = (props) => {
+    const { handleSubmit, register, errors, control, formState: { isDirty, isSubmitting } } = useForm()
+    const dispatch = useDispatch()
+
     const style = { margin: 12 }
-
-
     const { id } = props.match.params
     const back = `/groups/${id}`
-    // constructor(props) { // initializeしたときにbind
-        // super(props)
-        // this.onSubmit = this.onSubmit.bind(this)
-    // }
-
-    // async onSubmit(values) {
-        // await this.props.createGroup(values)
-        // this.props.history.push('/')
-    // }
-
-        // const { handleSubmit, pristine, submitting } = this.props
-        // 上記について）renderしたときにとってくる？
-        // pristine: 入力されていないとtrueを返す。入力されているとfalseを返す。
-        // submitting: 送信されるとtrueを返す。送信する前はfalseを返す。
-    const { handleSubmit, errors, control, formState: { isDirty, isSubmitting } } = useForm()
-    const dispatch = useDispatch()
 
     const onSubmit = (data) => { 
         dispatch(createPost(data))
         props.history.push(back)
     }
-    console.log('errorsをひょうじ')
-    console.log(errors)
-    console.log('errorsをひょうじ')
-    console.log('isdirtyをひょうじ')
-    console.log(isDirty)
-    console.log('isdirtyをひょうじ')
-    console.log('issubmittedをひょうじ')
-    console.log(isSubmitting)
-    console.log('issubmittedをひょうじ')
 
     return (
         <Container maxWidth="sm">
@@ -102,6 +78,9 @@ export const PostNew = (props) => {
                           rules={{required: '内容は必須です。', maxLength: {value: 2000, message: '文字数は2000文字以下になるようにしてください。'}}}
                         />
                         {/* <ErrorMessage errors={errors} name="content" as={<Alert severity="warning"><AlertTitle></AlertTitle></Alert>}/> */}
+                    </div>
+                    <div>
+                        <input type="hidden" ref={register} name="group_id" value={id}/>
                     </div>
                 </div>
                 <div>
