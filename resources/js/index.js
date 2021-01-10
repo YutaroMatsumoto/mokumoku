@@ -12,6 +12,7 @@ import GroupNew from './components/group_new'
 import GroupShow from './components/group_show'
 import { PostIndex } from './components/post_index'
 import { PostNew } from './components/post_new'
+import { PostShow } from './components/post_show'
 import reducer from './reducers/index'
 // import * as serviceWorker from './serviceWorker';
 
@@ -35,6 +36,7 @@ ReactDOM.render(
                 <Route exact path="/groups/:id" component={PostIndex} />
                 <Route path="/groups/:id/edit" component={GroupShow} />
                 <Route path="/groups/:id/post/new" component={PostNew} />
+                <Route path="/groups/:id/post/:post_id/edit" component={PostShow} />
             </Switch>
         </BrowserRouter>
     </Provider>,

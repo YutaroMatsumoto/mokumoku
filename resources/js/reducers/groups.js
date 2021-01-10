@@ -11,11 +11,9 @@ export default (groups = {}, action) => {
             console.log(_.mapKeys(action.response.data, 'id'))
             return _.mapKeys(action.response.data, 'id')
         case CREATE_GROUP:
-            console.log('CREATE_GROUPのろぐ')
         case GET_GROUP:
             const data = action.response.data
             return {...groups, [data.id]: data}
-            console.log('CREATE_GROUPのろぐ')
         case READ_POSTS:
         case UPDATE_GROUP:
             const datas = action.response.data

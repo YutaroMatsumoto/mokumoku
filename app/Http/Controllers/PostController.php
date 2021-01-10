@@ -17,7 +17,6 @@ class PostController extends Controller
     {
         // $group_posts = Group::find($id)->posts()->get();
         $group_posts = Group::with('posts')->find($id);
-
         return $group_posts;
     }
 
@@ -68,7 +67,16 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        // $post = Post::find($id);
+        $post = new Post;
+        $result = $post->select('title', 'content')->where('id', '=', $id)->first();
+        logger('showファンクション');
+        logger('showファンクション');
+        logger($result);
+        logger('showファンクション');
+        logger('showファンクション');
+        
+        return $result;
     }
 
     /**

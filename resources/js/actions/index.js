@@ -7,6 +7,7 @@ export const READ_POSTS = 'READ_POSTS'
 export const GET_GROUP = 'GET_GROUP'
 export const UPDATE_GROUP = 'UPDATE_GROUP'
 export const CREATE_POST = 'CREATE_POST'
+export const GET_POST = 'GET_POST'
 
 // viewのcomponent側で使用するため、exportする
 // tunkによって、actionの代わりに関数を返すことができるようになっている
@@ -22,7 +23,7 @@ export const createGroup = values => async dispatch => {
 }
 
 export const readPosts = id => async dispatch => {
-    const response =  await axios.get(`/api/getposts/${id}`)
+    const response =  await axios.get(`/api/get-posts/${id}`)
     dispatch({ type: READ_POSTS, response })
 }
 
@@ -42,9 +43,14 @@ export const updateGroup = values => async dispatch => {
 }
 
 export const createPost = values => async dispatch => {
+    const response =  await axios.post('/api/add-post', values)
+    dispatch({ type: CREATE_POST, response })
+}
+
+export const getPost = id => async dispatch => {
     console.log('actionはうごいているよ')
-    console.log(values)
+    console.log(id)
     console.log('actionはうごいているよ')
-    const response =  await axios.post('/api/addPost', values)
-    dispatch({ type: CREATE_POST, response }) // reducerに渡す。これにより、actionはtype, responseのkeyをもつ
+    const response = await axios.get(`/api/show-post/${id}`)
+    dispatch({ type: GET_POST, response })
 }

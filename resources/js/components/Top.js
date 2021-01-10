@@ -17,16 +17,6 @@ class Top extends Component {
 
     // コンポーネントがマウントされた時点で初期描画用のtodosをAPIから取得
     componentDidMount() {
-        // axios.get('/api/get')
-        //      .then((response) => {
-        //          console.log(response);
-        //          this.setState({
-        //              items: response.data
-        //          })
-        //      })
-        //      .catch(error => {
-        //          console.log(error);
-        //      })
         this.props.readGroups()
     }
 

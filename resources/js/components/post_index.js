@@ -58,6 +58,7 @@ export const PostIndex = (props) => {
                             <tr key={post.id}>
                                 <td>日付：{post.date}</td>
                                 <td>{post.title}</td>
+                                <td><Link to={`${group_posts.group_id}/post/${post.id}/edit`}>編集</Link></td>
                             </tr>
                         ))}
                         

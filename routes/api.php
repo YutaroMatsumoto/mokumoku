@@ -41,6 +41,7 @@ Route::group(['middleware' => 'api'], function() {
 	Route::get('show/{id}', 'App\Http\Controllers\GroupController@show');
 
 	// 投稿
-	Route::get('getposts/{id}', 'App\Http\Controllers\PostController@index');
-	Route::post('addPost', 'App\Http\Controllers\PostController@create');
+	Route::get('get-posts/{id}', 'App\Http\Controllers\PostController@index');
+	Route::post('add-post', 'App\Http\Controllers\PostController@create');
+	Route::get('show-post/{id}', 'App\Http\Controllers\PostController@show');
 });
