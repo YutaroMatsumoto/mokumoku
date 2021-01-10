@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import _ from 'lodash'
 import { Link }　from 'react-router-dom'
 
-import { readPosts } from '../actions/index'
+import { readPosts, getPost } from '../actions/index'
 
 // componentDidMount() {
 // const { id } = this.props.match.params

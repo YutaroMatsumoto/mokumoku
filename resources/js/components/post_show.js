@@ -30,31 +30,28 @@ export const PostShow = (props) => {
     const dispatch = useDispatch()
 
     const post = useSelector(state => state.posts)
-    console.log('useselector実行')
-    console.log(post)
-    // console.log(post.title)
 
-    const { handleSubmit, register, reset, errors, control, formState: { isDirty, isSubmitting } } = useForm({ defaultValues: post })
+    var title = ""
+    var content = ""
+    if(post_id == post.id) {
+      title = post.title
+      content = post.content
+    }
+
+    const { handleSubmit, register, reset, errors, control, formState: { isDirty, isSubmitting } } = useForm({ defaultValues: {title: title, content: content} })
 
     useEffect(() => {
-      console.log('実行まえ')
       dispatch(getPost(post_id))
-      console.log('実行あと')
     }, [post_id])
 
-    // 以下の実装だと、編集画面を表示するのが2回目以降の場合、レンダリング回数が増える
+    // 以下の実装だと、編集画面を表示するのが2回目以降の場合、レンダリング回数が増える -> resetの実行条件を変更することにより、reset実行回数を少なくすることに成功
     useEffect(() => {
-      if(post.title) {
-        console.log('resetがじっこうされた')
-        console.log('resetがじっこうされた')
+      if(post_id == post.id) {
         reset(post) // resetを実行するとdefaultValuesをresetしてくれる？
       } else{ 
-        console.log('resetはじっこうされていない')
-        console.log('resetはじっこうされていない')
       }
     }, [post.title])
 
-    console.log('あいうえお')
 
 
     // 以下にすると、結局無限ループになる //

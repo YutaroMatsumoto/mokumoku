@@ -69,7 +69,7 @@ class PostController extends Controller
     {
         // $post = Post::find($id);
         $post = new Post;
-        $result = $post->select('title', 'content')->where('id', '=', $id)->first();
+        $result = $post->select('id' ,'title', 'content')->where('id', '=', $id)->first();
         logger('showファンクション');
         logger('showファンクション');
         logger($result);
