@@ -85,6 +85,8 @@ export const PostShow = (props) => {
         // dispatch(createPost(data))
         // props.history.push(back)
         console.log(data)
+        console.log(data)
+        console.log(data)
 
     }
 
