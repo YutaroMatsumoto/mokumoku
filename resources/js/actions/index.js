@@ -9,6 +9,7 @@ export const UPDATE_GROUP = 'UPDATE_GROUP'
 export const CREATE_POST = 'CREATE_POST'
 export const GET_POST = 'GET_POST'
 export const UPDATE_POST = 'UPDATE_POST'
+export const DELETE_POST = 'DELETE_POST'
 
 // viewのcomponent側で使用するため、exportする
 // tunkによって、actionの代わりに関数を返すことができるようになっている
@@ -46,18 +47,18 @@ export const createPost = values => async dispatch => {
 }
 
 export const getPost = id => async dispatch => {
-    console.log('actionはうごいているよ')
-    console.log(id)
-    console.log('actionはうごいているよ')
     const response = await axios.get(`/api/show-post/${id}`)
     dispatch({ type: GET_POST, response })
 }
 
 export const updatePost = values => async dispatch => {
     const id = values.post_id
-    console.log('updatepostがうごいている')
-    console.log(values)
-    console.log('updatepostがうごいている')
     const response = await axios.post(`/api/update-post/${id}`, values)
     dispatch({ type: UPDATE_POST, response })
+}
+
+export  const deletePost = id => async dispatch => {
+    console.log('deletepostのactioncreatorが動いている')
+    const response = await axios.post(`/api/delete-post/${id}`)
+    dispatch({ type: DELETE_POST, response })
 }

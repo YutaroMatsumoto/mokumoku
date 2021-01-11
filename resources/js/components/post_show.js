@@ -7,7 +7,7 @@ import { ErrorMessage } from '@hookform/error-message'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link }　from 'react-router-dom'
 import { Button, TextField, Container } from '@material-ui/core'
-import { getPost, updatePost } from '../actions/index'
+import { getPost, updatePost, deletePost } from '../actions/index'
 import { PostIndex } from './post_index'
 import { result } from 'lodash'
 
@@ -22,7 +22,6 @@ import { result } from 'lodash'
  // setvalue使ってみる（useForm）
 
 export const PostShow = (props) => {
-    console.log(props)
     const style = { margin: 12 }
     const { id } = props.match.params // これはグループのid
     const { post_id } = props.match.params
@@ -31,9 +30,6 @@ export const PostShow = (props) => {
     const dispatch = useDispatch()
 
     const post = useSelector(state => state.posts)
-    console.log('useselectorをひょうじするよ')
-    console.log(post)
-    console.log('useselectorをひょうじするよ')
 
     var title = ""
     var content = ""
@@ -89,6 +85,11 @@ export const PostShow = (props) => {
         props.history.push(back)
     }
 
+    const onDelete = () => {
+      dispatch(deletePost(post_id))
+      props.history.push(back)
+    }
+
     return (
         <Container maxWidth="sm">
             <h1>投稿編集画面</h1> 
@@ -142,6 +143,12 @@ export const PostShow = (props) => {
                     {/* <input type="submit" value="Submit" disabled={pristine || submitting} /> */}
                     <Button
                       variant="contained"
+                      component={Link}
+                      to={back}
+                      style={style}
+                    >戻る</Button>
+                    <Button
+                      variant="contained"
                       color="primary"
                       onClick={handleSubmit(onSubmit)}
                       style={style}
@@ -149,10 +156,10 @@ export const PostShow = (props) => {
                     >送信</Button>
                     <Button
                       variant="contained"
-                      component={Link}
-                      to={back}
+                      color="secondary"
+                      onClick={handleSubmit(onDelete)}
                       style={style}
-                    >戻る</Button>
+                    >削除</Button>
                 </div>
             </form>
             

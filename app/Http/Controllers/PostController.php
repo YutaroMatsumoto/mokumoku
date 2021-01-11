@@ -15,8 +15,11 @@ class PostController extends Controller
      */
     public function index($id)
     {
-        // $group_posts = Group::find($id)->posts()->get();
-        $group_posts = Group::with('posts')->find($id);
+        // 削除されていない投稿のみを取得する
+        $group_posts = Group::with(['posts' => function ($query) {
+            $query->where('delete', '=', 0);
+        }])->find($id);
+
         return $group_posts;
     }
 
@@ -80,8 +83,8 @@ class PostController extends Controller
         $post = Post::find($id);
         $post->title = $request->input('title');
         $post->content = $request->input('content');
-
         $post->save();
+        
         return;
     }
 
@@ -93,6 +96,12 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        logger('削除機能うごいているよ');
+        logger('削除機能うごいているよ');
+        $post = Post::find($id);
+        $post->delete = 1;
+        $post->save();
+
+        return;
     }
 }

@@ -45,4 +45,5 @@ Route::group(['middleware' => 'api'], function() {
 	Route::post('add-post', 'App\Http\Controllers\PostController@create');
 	Route::get('show-post/{id}', 'App\Http\Controllers\PostController@show');
 	Route::post('update-post/{id}', 'App\Http\Controllers\PostController@update');
+	Route::post('delete-post/{id}', 'App\Http\Controllers\PostController@destroy');
 });
