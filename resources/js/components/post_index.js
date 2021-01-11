@@ -27,9 +27,6 @@ export const PostIndex = (props) => {
     },[id])
 
     const group_posts = useSelector(state => state.groups)
-    console.log('group_postsをひょうじ')
-    console.log(group_posts)
-    console.log('group_postsをひょうじ')
 
     // const a = props
     // const { group_posts } = props

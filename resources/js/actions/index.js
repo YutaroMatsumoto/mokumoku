@@ -58,7 +58,6 @@ export const updatePost = values => async dispatch => {
 }
 
 export  const deletePost = id => async dispatch => {
-    console.log('deletepostのactioncreatorが動いている')
     const response = await axios.post(`/api/delete-post/${id}`)
     dispatch({ type: DELETE_POST, response })
 }

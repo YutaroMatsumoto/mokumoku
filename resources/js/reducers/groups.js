@@ -5,10 +5,6 @@ import { READ_GROUPS, CREATE_GROUP, GET_GROUP, UPDATE_GROUP, READ_POSTS } from '
 export default (groups = {}, action) => {
     switch(action.type) {
         case READ_GROUPS:
-            console.log('READ_GROUPSのろぐ')
-            console.log(action)
-            console.log('READ_GROUPSのろぐ')
-            console.log(_.mapKeys(action.response.data, 'id'))
             return _.mapKeys(action.response.data, 'id')
         case CREATE_GROUP:
         case GET_GROUP:

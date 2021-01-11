@@ -96,8 +96,6 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        logger('削除機能うごいているよ');
-        logger('削除機能うごいているよ');
         $post = Post::find($id);
         $post->delete = 1;
         $post->save();

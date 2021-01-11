@@ -31,10 +31,6 @@ class GroupNew extends Component {
     }
 
     render() {
-        console.log('useformを表示')
-        console.log(useForm)
-        console.log('useformを表示')
-
         const { handleSubmit, pristine, submitting } = this.props
         // 上記について）renderしたときにとってくる？
         // pristine: 入力されていないとtrueを返す。入力されているとfalseを返す。
@@ -67,7 +63,6 @@ const validate = values => {
     if (!values.name) errors.name = "グループ名を入力してください。"
     if (!values.detail) errors.detail = "説明を入力してください。"
 
-    console.log(errors)
     return errors
 }
 
