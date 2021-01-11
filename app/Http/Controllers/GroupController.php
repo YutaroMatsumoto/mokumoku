@@ -15,10 +15,6 @@ class GroupController extends Controller
     public function index()
     {
         $groups = Group::all();
-        logger('groupコントローラ');
-        logger('groupコントローラ');
-        logger('groupコントローラ');
-        logger('groupコントローラ');
 
         return $groups;
     }
@@ -30,11 +26,6 @@ class GroupController extends Controller
      */
     public function create(Request $request)
     {
-        logger('リクエストの中身を表示');
-        logger('リクエストの中身を表示');
-        logger($request);
-        logger('リクエストの中身を表示');
-        logger('リクエストの中身を表示');
         $group = new Group;
         $group->user_id = 1;
         $group->name = $request->input('name');
@@ -70,17 +61,6 @@ class GroupController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -96,11 +76,6 @@ class GroupController extends Controller
         $group->save();
 
         $updated_group = Group::with('posts')->find($id);
-        logger('updateごのグループ？？');
-        logger('updateごのグループ？？');
-        logger($updated_group);
-        logger('updateごのグループ？？');
-        logger('updateごのグループ？？');
 
         return $updated_group;
     }

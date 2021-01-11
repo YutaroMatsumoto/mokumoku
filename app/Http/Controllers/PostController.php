@@ -28,12 +28,6 @@ class PostController extends Controller
     public function create(Request $request)
     {
         $user_id = 1;
-        logger('リクエストの中身を表示');
-        logger('リクエストの中身を表示');
-        logger($request);
-        logger('リクエストの中身を表示');
-        logger('リクエストの中身を表示');
-
         $today = date('Y-m-d');
         $post = new Post;
         $post->user_id = 1;
@@ -70,24 +64,8 @@ class PostController extends Controller
         // $post = Post::find($id);
         $post = new Post;
         $result = $post->select('id' ,'title', 'content')->where('id', '=', $id)->first();
-        logger('showファンクション');
-        logger('showファンクション');
-        logger($result);
-        logger('showファンクション');
-        logger('showファンクション');
         
         return $result;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -99,7 +77,12 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+
+        $post->save();
+        return;
     }
 
     /**

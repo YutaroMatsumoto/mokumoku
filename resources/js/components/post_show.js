@@ -7,7 +7,7 @@ import { ErrorMessage } from '@hookform/error-message'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link }　from 'react-router-dom'
 import { Button, TextField, Container } from '@material-ui/core'
-import { createPost, getPost } from '../actions/index'
+import { getPost, updatePost } from '../actions/index'
 import { PostIndex } from './post_index'
 import { result } from 'lodash'
 
@@ -22,6 +22,7 @@ import { result } from 'lodash'
  // setvalue使ってみる（useForm）
 
 export const PostShow = (props) => {
+    console.log(props)
     const style = { margin: 12 }
     const { id } = props.match.params // これはグループのid
     const { post_id } = props.match.params
@@ -30,6 +31,9 @@ export const PostShow = (props) => {
     const dispatch = useDispatch()
 
     const post = useSelector(state => state.posts)
+    console.log('useselectorをひょうじするよ')
+    console.log(post)
+    console.log('useselectorをひょうじするよ')
 
     var title = ""
     var content = ""
@@ -48,9 +52,8 @@ export const PostShow = (props) => {
     useEffect(() => {
       if(post_id == post.id) {
         reset(post) // resetを実行するとdefaultValuesをresetしてくれる？
-      } else{ 
       }
-    }, [post.title])
+    }, [post])
 
 
 
@@ -81,13 +84,9 @@ export const PostShow = (props) => {
     // }, [reset])
     //--------------------------//
 
-    const onSubmit = (data) => { 
-        // dispatch(createPost(data))
-        // props.history.push(back)
-        console.log(data)
-        console.log(data)
-        console.log(data)
-
+    const onSubmit = (values) => { 
+        dispatch(updatePost(values))
+        props.history.push(back)
     }
 
     return (
@@ -134,6 +133,9 @@ export const PostShow = (props) => {
                     </div>
                     <div>
                         <input type="hidden" ref={register} name="group_id" value={id}/>
+                    </div>
+                    <div>
+                        <input type="hidden" ref={register} name="post_id" value={post_id}/>
                     </div>
                 </div>
                 <div>
