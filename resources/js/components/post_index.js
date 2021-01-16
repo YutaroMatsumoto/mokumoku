@@ -4,15 +4,57 @@ import { useSelector, useDispatch } from 'react-redux'
 import _ from 'lodash'
 import { Link }　from 'react-router-dom'
 
-import { readPosts, getPost } from '../actions/index'
+import { Button, TextField, Container } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-// componentDidMount() {
-// const { id } = this.props.match.params
-// this.props.readPosts(id)
-// }
+import { readPosts } from '../actions/index'
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      width: '100%',
+    },
+    accordingSummary: {
+      height: '1px',
+      backgroundColor: 'rgba(0, 0, 0, .03)',
+      borderBottom: '1px solid rgba(0, 0, 0, .125)',
+    //   marginBottom: -1,
+    //   verticalAlign: 'middle'
+    },
+    heading: {
+      fontSize: theme.typography.pxToRem(15),
+      flexBasis: '50%',
+      flexShrink: 0,
+    },
+    secondaryHeading: {
+      fontSize: theme.typography.pxToRem(15),
+      flexBasis: '40%',
+      color: theme.palette.text.secondary,
+    },
+    editLink: {
+      fontSize: theme.typography.pxToRem(15),
+    },
+    content: {
+      whiteSpace: 'pre-line',
+      flexBasis: '90%',
+    }
+  }));
+
+const style={  }
 
 export const PostIndex = (props) => {
 
+    const classes = useStyles();
+    const [expanded, setExpanded] = React.useState(false);
+    const handleChange = (panel) => (event, isExpanded) => {
+        // 閉じた状態でクリックすると、expandedがtrueになる　-> trueのため、expandedが、panelの値になる。
+        // expandedとクリックされたidが同じだと、パネルが開いた状態になる。
+        setExpanded(isExpanded ? panel : false);
+    };
     const dispatch = useDispatch()
 
 
@@ -45,26 +87,45 @@ export const PostIndex = (props) => {
         // console.log('投稿なし')
     // }
     return (
-        <React.Fragment>
+        <Container maxWidth="lg">
                 <p>グループ情報</p>
                 <p>グループ名：{group_posts.group_name ? group_posts.group_name : '' }</p>
                 <p>グループ詳細：{group_posts.group_detail ? group_posts.group_detail : '' }</p>
                 <Link to='/'>戻る</Link>
                 <Link to={`${group_posts.group_id}/edit`}>グループ情報を編集する</Link>
                 <Link to={`${group_posts.group_id}/post/new`}>投稿</Link>
-                <table>
-                    <tbody>
-                        {_.map(group_posts.posts, post => (
-                            <tr key={post.id}>
-                                <td>日付：{post.date}</td>
-                                <td>{post.title}</td>
-                                <td><Link to={`${group_posts.group_id}/post/${post.id}/edit`}>編集</Link></td>
-                            </tr>
-                        ))}
-                        
-                    </tbody>
-                </table>
-        </React.Fragment>
+                {_.map(group_posts.posts, post => {
+                    const panel_id = `panel${post.id}`
+                    const panel_area = `${panel_id}bh-content`
+                    const panel_area_id = `${panel_id}1bh-header`
+                    return (
+                        <Accordion key={post.id} expanded={expanded === panel_id} onChange={handleChange(`${panel_id}`)}>
+                            <AccordionSummary
+                                className={classes.accordingSummary}
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls={panel_area}
+                                id={panel_area_id}
+                            >
+                                <Typography className={classes.heading}>{post.title}</Typography>
+                                <Typography className={classes.secondaryHeading}>日付：{post.date}</Typography>
+                                {/* <Link to={`${group_posts.group_id}/post/${post.id}/edit`}>編集</Link> */}
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Typography className={classes.content}>
+                                    {post.content}                                
+                                </Typography>
+                                <Typography className={classes.editLink}>
+                                    <Button
+                                      color="primary"
+                                      component={Link}
+                                      to={`${group_posts.group_id}/post/${post.id}/edit`}
+                                    >編集</Button>
+                                </Typography>
+                            </AccordionDetails>
+                        </Accordion>
+                    )
+                })}
+        </Container>
     )
 }
 
