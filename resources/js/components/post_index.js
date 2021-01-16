@@ -10,13 +10,16 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import { readPosts } from '../actions/index'
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      width: '100%',
+      height: '100%',
+      backgroundColor: '#D9E5FF'
     },
     accordingSummary: {
       height: '1px',
@@ -24,6 +27,12 @@ const useStyles = makeStyles((theme) => ({
       borderBottom: '1px solid rgba(0, 0, 0, .125)',
     //   marginBottom: -1,
     //   verticalAlign: 'middle'
+    },
+    title: {
+      fontSize: theme.typography.pxToRem(15),
+      flexBasis: '50%',
+      borderBottom: '1px solid rgba(0, 0, 0, .125)',
+
     },
     heading: {
       fontSize: theme.typography.pxToRem(15),
@@ -40,15 +49,29 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
       whiteSpace: 'pre-line',
-      flexBasis: '90%',
-    }
+      flexBasis: '85%',
+    },
+    paper: {
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.success,
+    },
+    paper2: {
+        padding: theme.spacing(2),
+        whiteSpace: 'pre-line',
+        backgroundColor: 'rgba(0, 0, 0, .03)',
+    },
+    // button: {
+        // margin: '12'
+    // }
   }));
 
-const style={  }
 
 export const PostIndex = (props) => {
 
     const classes = useStyles();
+    const button_style = { margin: 12 }
+
     const [expanded, setExpanded] = React.useState(false);
     const handleChange = (panel) => (event, isExpanded) => {
         // 閉じた状態でクリックすると、expandedがtrueになる　-> trueのため、expandedが、panelの値になる。
@@ -87,13 +110,48 @@ export const PostIndex = (props) => {
         // console.log('投稿なし')
     // }
     return (
-        <Container maxWidth="lg">
-                <p>グループ情報</p>
-                <p>グループ名：{group_posts.group_name ? group_posts.group_name : '' }</p>
-                <p>グループ詳細：{group_posts.group_detail ? group_posts.group_detail : '' }</p>
-                <Link to='/'>戻る</Link>
-                <Link to={`${group_posts.group_id}/edit`}>グループ情報を編集する</Link>
-                <Link to={`${group_posts.group_id}/post/new`}>投稿</Link>
+        // <div className={classes.root}>
+            <Container maxWidth="lg">
+                <br/>
+                <Grid container spacing={1}>
+                    <Grid item xs={12}><Paper className={classes.paper}>グループ情報</Paper></Grid>
+                </Grid>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <Paper className={classes.paper2}>
+                            グループ名：{group_posts.group_name ? group_posts.group_name : ''} <br/>
+                            グループ詳細：{group_posts.group_detail ? group_posts.group_detail : ''}
+                        </Paper>
+                    </Grid>
+                </Grid>
+                <br/>
+
+                <Button
+                    variant="contained"
+                    component={Link}
+                    to='/'
+                    style={button_style}
+                >戻る</Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    component={Link}
+                    to={`${group_posts.group_id}/edit`}
+                    style={button_style}
+                >グループ情報を編集する</Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    component={Link}
+                    to={`${group_posts.group_id}/post/new`}
+                    style={button_style}
+                >投稿</Button>
+                <br/>
+                <br/>
+                <Grid container spacing={1}>
+                    <Grid item xs={12}><Paper className={classes.paper}>投稿一覧</Paper></Grid>
+                </Grid>
+                <br/>
                 {_.map(group_posts.posts, post => {
                     const panel_id = `panel${post.id}`
                     const panel_area = `${panel_id}bh-content`
@@ -116,16 +174,18 @@ export const PostIndex = (props) => {
                                 </Typography>
                                 <Typography className={classes.editLink}>
                                     <Button
-                                      color="primary"
-                                      component={Link}
-                                      to={`${group_posts.group_id}/post/${post.id}/edit`}
-                                    >編集</Button>
+                                        variant="contained"
+                                        color="primary"
+                                        component={Link}
+                                        to={`${group_posts.group_id}/post/${post.id}/edit`}
+                                    >投稿を編集</Button>
                                 </Typography>
                             </AccordionDetails>
                         </Accordion>
                     )
                 })}
-        </Container>
+            </Container>
+        // </div>
     )
 }
 
