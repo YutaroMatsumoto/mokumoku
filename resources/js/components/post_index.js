@@ -93,22 +93,18 @@ export const PostIndex = (props) => {
 
     const group_posts = useSelector(state => state.groups)
 
-    // const a = props
-    // const { group_posts } = props
-    // console.log('aaa')
-    // console.log(props)
-    // console.log('aaa')
-    // console.log('postsをひょうじする')
-    // console.log('postsをひょうじする')
-    // console.log(group_posts.posts)
-    // console.log('postsをひょうじする')
-    // console.log('postsをひょうじする')
-    // const check = Object.keys(group_posts.posts).length
-    // if(group_posts.posts) {
-        // console.log('投稿あり')
-    // } else {
-        // console.log('投稿なし')
-    // }
+    console.log(group_posts)
+    var post_check = false
+    const no_post_message = 'まだ投稿がありません。'
+    if(group_posts.posts) {
+        console.log('投稿あり')
+        const check = Object.keys(group_posts.posts).length
+        if(check === 0) {
+            console.log('からオブジェクトだよー')
+            post_check = true
+        }
+    }
+
     return (
         <Container maxWidth="lg">
             <br/>
@@ -149,11 +145,12 @@ export const PostIndex = (props) => {
 
             <br/>
             <br/>
-            
+
             <Grid container spacing={1}>
                 <Grid item xs={12}><Paper className={classes.paper}>投稿一覧</Paper></Grid>
             </Grid>
             <br/>
+            {post_check ? no_post_message : ''}
             {_.map(group_posts.posts, post => {
                 const panel_id = `panel${post.id}`
                 const panel_area = `${panel_id}bh-content`
