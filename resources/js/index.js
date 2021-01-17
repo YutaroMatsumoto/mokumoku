@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-import Top from './components/Top'
+import { Top } from './components/Top'
 import GroupNew from './components/group_new'
 // import PostNew from './components/post_new'
 import GroupShow from './components/group_show'
