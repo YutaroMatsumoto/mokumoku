@@ -110,82 +110,83 @@ export const PostIndex = (props) => {
         // console.log('投稿なし')
     // }
     return (
-        // <div className={classes.root}>
-            <Container maxWidth="lg">
-                <br/>
-                <Grid container spacing={1}>
-                    <Grid item xs={12}><Paper className={classes.paper}>グループ情報</Paper></Grid>
+        <Container maxWidth="lg">
+            <br/>
+            <Grid container spacing={1}>
+                <Grid item xs={12}><Paper className={classes.paper}>グループ情報</Paper></Grid>
+            </Grid>
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
+                    <Paper className={classes.paper2}>
+                        グループ名：{group_posts.group_name ? group_posts.group_name : ''} <br/>
+                        グループ詳細：{group_posts.group_detail ? group_posts.group_detail : ''}
+                    </Paper>
                 </Grid>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <Paper className={classes.paper2}>
-                            グループ名：{group_posts.group_name ? group_posts.group_name : ''} <br/>
-                            グループ詳細：{group_posts.group_detail ? group_posts.group_detail : ''}
-                        </Paper>
-                    </Grid>
-                </Grid>
-                <br/>
+            </Grid>
 
-                <Button
-                    variant="contained"
-                    component={Link}
-                    to='/'
-                    style={button_style}
-                >戻る</Button>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    component={Link}
-                    to={`${group_posts.group_id}/edit`}
-                    style={button_style}
-                >グループ情報を編集する</Button>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    component={Link}
-                    to={`${group_posts.group_id}/post/new`}
-                    style={button_style}
-                >投稿</Button>
-                <br/>
-                <br/>
-                <Grid container spacing={1}>
-                    <Grid item xs={12}><Paper className={classes.paper}>投稿一覧</Paper></Grid>
-                </Grid>
-                <br/>
-                {_.map(group_posts.posts, post => {
-                    const panel_id = `panel${post.id}`
-                    const panel_area = `${panel_id}bh-content`
-                    const panel_area_id = `${panel_id}1bh-header`
-                    return (
-                        <Accordion key={post.id} expanded={expanded === panel_id} onChange={handleChange(`${panel_id}`)}>
-                            <AccordionSummary
-                                className={classes.accordingSummary}
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls={panel_area}
-                                id={panel_area_id}
-                            >
-                                <Typography className={classes.heading}>{post.title}</Typography>
-                                <Typography className={classes.secondaryHeading}>日付：{post.date}</Typography>
-                                {/* <Link to={`${group_posts.group_id}/post/${post.id}/edit`}>編集</Link> */}
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography className={classes.content}>
-                                    {post.content}                                
-                                </Typography>
-                                <Typography className={classes.editLink}>
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        component={Link}
-                                        to={`${group_posts.group_id}/post/${post.id}/edit`}
-                                    >投稿を編集</Button>
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion>
-                    )
-                })}
-            </Container>
-        // </div>
+            <br/>
+
+            <Button
+                variant="contained"
+                component={Link}
+                to='/'
+                style={button_style}
+            >戻る</Button>
+            <Button
+                variant="contained"
+                color="primary"
+                component={Link}
+                to={`${group_posts.group_id}/edit`}
+                style={button_style}
+            >グループ情報を編集する</Button>
+            <Button
+                variant="contained"
+                color="primary"
+                component={Link}
+                to={`${group_posts.group_id}/post/new`}
+                style={button_style}
+            >投稿</Button>
+
+            <br/>
+            <br/>
+            
+            <Grid container spacing={1}>
+                <Grid item xs={12}><Paper className={classes.paper}>投稿一覧</Paper></Grid>
+            </Grid>
+            <br/>
+            {_.map(group_posts.posts, post => {
+                const panel_id = `panel${post.id}`
+                const panel_area = `${panel_id}bh-content`
+                const panel_area_id = `${panel_id}1bh-header`
+                return (
+                    <Accordion key={post.id} expanded={expanded === panel_id} onChange={handleChange(`${panel_id}`)}>
+                        <AccordionSummary
+                            className={classes.accordingSummary}
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls={panel_area}
+                            id={panel_area_id}
+                        >
+                            <Typography className={classes.heading}>{post.title}</Typography>
+                            <Typography className={classes.secondaryHeading}>日付：{post.date}</Typography>
+                            {/* <Link to={`${group_posts.group_id}/post/${post.id}/edit`}>編集</Link> */}
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography className={classes.content}>
+                                {post.content}                                
+                            </Typography>
+                            <Typography className={classes.editLink}>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    component={Link}
+                                    to={`${group_posts.group_id}/post/${post.id}/edit`}
+                                >投稿を編集</Button>
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
+                )
+            })}
+        </Container>
     )
 }
 
