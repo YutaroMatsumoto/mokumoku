@@ -25,8 +25,6 @@ const useStyles = makeStyles((theme) => ({
       height: '1px',
       backgroundColor: 'rgba(0, 0, 0, .03)',
       borderBottom: '1px solid rgba(0, 0, 0, .125)',
-    //   marginBottom: -1,
-    //   verticalAlign: 'middle'
     },
     title: {
       fontSize: theme.typography.pxToRem(15),
@@ -61,9 +59,6 @@ const useStyles = makeStyles((theme) => ({
         whiteSpace: 'pre-line',
         backgroundColor: 'rgba(0, 0, 0, .03)',
     },
-    // button: {
-        // margin: '12'
-    // }
   }));
 
 
@@ -93,14 +88,11 @@ export const PostIndex = (props) => {
 
     const group_posts = useSelector(state => state.groups)
 
-    console.log(group_posts)
     var post_check = false
     const no_post_message = 'まだ投稿がありません。'
     if(group_posts.posts) {
-        console.log('投稿あり')
         const check = Object.keys(group_posts.posts).length
         if(check === 0) {
-            console.log('からオブジェクトだよー')
             post_check = true
         }
     }
