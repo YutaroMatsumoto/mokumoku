@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import PostAddIcon from '@material-ui/icons/PostAdd';
 
 import { readPosts } from '../actions/index'
 
