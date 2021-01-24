@@ -1,73 +1,78 @@
-import React, { Component } from 'react'
-import { useForm } from 'react-hook-form'
+import React from 'react'
+import { useForm, Controller } from 'react-hook-form'
 
-import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
+import { useDispatch } from 'react-redux'
 import { Link }　from 'react-router-dom'
+import { Button, TextField, Container } from '@material-ui/core'
 
 import { createGroup } from '../actions/index'
 
-class GroupNew extends Component {
-    constructor(props) { // initializeしたときにbind
-        super(props)
-        this.onSubmit = this.onSubmit.bind(this)
+export const GroupNew = (props) => {
+    const { handleSubmit, register, errors, control, formState: { isDirty, isSubmitting } } = useForm()
+    const dispatch = useDispatch()
+    const style = { margin: 12 }
+    const onSubmit = (data) => {
+        dispatch(createGroup(data))
+        props.history.push('/')
     }
 
-    renderField(field) {
-        const { input, label, type, meta: { touched, error } } = field
-
-        return (
-            <div>
-                <label>{label}</label>
-                <input {...input} placeholder={label} type={type} />
-                { touched && error && <span>{error}</span> }
-            </div>
-        )
-    }
-
-    async onSubmit(values) {
-        await this.props.createGroup(values)
-        this.props.history.push('/')
-    }
-
-    render() {
-        const { handleSubmit, pristine, submitting } = this.props
-        // 上記について）renderしたときにとってくる？
-        // pristine: 入力されていないとtrueを返す。入力されているとfalseを返す。
-        // submitting: 送信されるとtrueを返す。送信する前はfalseを返す。
-        
-        return (
-            <div>
-                <h1>新規作成画面</h1>
-                <form onSubmit={handleSubmit(this.onSubmit)}>
+    return (
+        <Container maxWidth="lg">
+            <h1>グループ作成画面</h1>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div>
                     <div>
-                        <Field label="グループ名" name="name" type="text" component={this.renderField}/>
-                        <Field label="説明" name="detail" type="text" component={this.renderField}/>
-                        {/* <Field label="Name" name="name" type="text" component="input" placeholder="グループ名"/> */}
-                    </div>
+                        <Controller
+                          error={errors.name ? true : false}
+                          as={<TextField 
+                            label="グループ名"
+                            variant="outlined"
+                            helperText={errors.name ? errors.name.message : false}
+                            fullWidth={true}/>}
+                          name="name"
+                          placeholder="グループ名"
+                          defaultValue=""
+                          control={control}
+                          rules={{required: 'グループ名は必須です。', maxLength: {value: 250, message: '文字数は250文字以下になるようにしてください。'}}}
+                        />
+                    </div><br/>
                     <div>
-                        <input type="submit" value="Submit" disabled={pristine || submitting} />
-                        <Link to="/">Cancel</Link>
+                        <Controller
+                          error={errors.detail ? true : false}
+                          as={<TextField
+                            label="グループの概要"
+                            multiline
+                            variant="outlined"
+                            helperText={errors.detail ? errors.detail.message : false}
+                            fullWidth={true}
+                            rows={3}/>}
+                          name="detail"
+                          placeholder="グループの概要"
+                          defaultValue=""
+                          control={control}
+                          rules={{required: 'グループの概要は必須です。', maxLength: {value: 200, message: '文字数は200文字以下になるようにしてください。'}}}
+                        />
                     </div>
-                </form>
-            </div>
-            
+                </div>
 
-        )
-    }
+                <div>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleSubmit(onSubmit)}
+                      style={style}
+                      disabled={!isDirty || isSubmitting}
+                    >送信</Button>
+                    <Button
+                      variant="contained"
+                      component={Link}
+                      to="/"
+                      style={style}
+                    >戻る</Button>
+                </div>
+
+            </form>
+
+        </Container>
+    )
 }
-
-const validate = values => {
-    const errors = {}
-
-    if (!values.name) errors.name = "グループ名を入力してください。"
-    if (!values.detail) errors.detail = "説明を入力してください。"
-
-    return errors
-}
-
-const mapDispatchToProps = ({ createGroup })
-
-export default connect(null, mapDispatchToProps)(
-    reduxForm({ validate, form: 'groupNewForm' })(GroupNew)
-)
