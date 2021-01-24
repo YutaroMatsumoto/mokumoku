@@ -9,7 +9,8 @@ export default (groups = {}, action) => {
         case CREATE_GROUP:
         case GET_GROUP:
             const data = action.response.data
-            return {...groups, [data.id]: data}
+            // return {[data.id]: data}
+            return data
         case READ_POSTS:
         case UPDATE_GROUP:
             const datas = action.response.data

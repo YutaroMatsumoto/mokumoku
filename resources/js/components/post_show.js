@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import { useForm, Controller } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
@@ -31,14 +31,7 @@ export const PostShow = (props) => {
 
     const post = useSelector(state => state.posts)
 
-    var title = ""
-    var content = ""
-    if(post_id == post.id) {
-      title = post.title
-      content = post.content
-    }
-
-    const { handleSubmit, register, reset, errors, control, formState: { isDirty, isSubmitting } } = useForm({ defaultValues: {title: title, content: content} })
+    const { handleSubmit, register, reset, errors, control, formState: { isDirty, isSubmitting } } = useForm({ defaultValues: {title: '', content: ''} })
 
     useEffect(() => {
       dispatch(getPost(post_id))

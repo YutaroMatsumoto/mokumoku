@@ -50,7 +50,7 @@ export const GroupNew = (props) => {
                           placeholder="グループの概要"
                           defaultValue=""
                           control={control}
-                          rules={{required: 'グループの概要は必須です。', maxLength: {value: 200, message: '文字数は200文字以下になるようにしてください。'}}}
+                          rules={{required: 'グループの概要は必須です。', maxLength: {value: 250, message: '文字数は200文字以下になるようにしてください。'}}}
                         />
                     </div>
                 </div>
