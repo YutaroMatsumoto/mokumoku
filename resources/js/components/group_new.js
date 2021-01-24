@@ -17,7 +17,7 @@ export const GroupNew = (props) => {
     }
 
     return (
-        <Container maxWidth="lg">
+        <Container maxWidth="sm">
             <h1>グループ作成画面</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
