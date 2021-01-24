@@ -127,7 +127,7 @@ export const PostIndex = (props) => {
                 component={Link}
                 to={`${group_posts.group_id}/edit`}
                 style={button_style}
-            >グループ情報を編集する</Button>
+            >グループ情報を編集</Button>
             <Button
                 variant="contained"
                 color="primary"
