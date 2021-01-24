@@ -12,11 +12,16 @@ const useStyles = makeStyles((theme) => ({
     card: {
         width: '25%',
     },
+    titlePaper: {
+        padding: theme.spacing(2),
+        textAlign: 'center',
+    },
     paper: {
         padding: theme.spacing(2),
         margin: 'auto',
-        height: 200,
+        height: 210,
         display: 'flex',
+        backgroundColor: 'rgba(0, 0, 0, .03)',
         // height: 200,
         // textOverflow: 'ellipsis',
         // width: 
@@ -26,12 +31,14 @@ const useStyles = makeStyles((theme) => ({
         textOverflow: 'ellipsis',
     },
     detail: {
-        maxHeight: 110,
+        maxHeight: 100,
+        overflow: 'hidden',
         textOverflow: 'ellipsis',
+        display: '-webkit-box',
+        WebkitLineClamp: 3,
     },
     button: {
         alignItems: 'flex-end',
-        cursor: 'pointer',
     }
     
 }))
@@ -45,14 +52,6 @@ export const Top = (props) => {
 
     const groups = useSelector(state => state.groups)
 
-    var groupCount = 0
-    if(groups) {
-        groupCount = Object.keys(groups).length
-        console.log('groupなんこ？')
-        console.log(groupCount)
-        console.log('groupなんこ？')
-    }
-
     const classes = useStyles()
     const style = { margin: 12 }
 
@@ -65,7 +64,13 @@ export const Top = (props) => {
               component={Link}
               to="/groups/new"
             >新しいグループを作成</Button>
-                <Grid container spacing={4}>
+            <br/>
+            <br/>
+            <Grid container spacing={1}>
+                <Grid item xs={12}><Paper className={classes.titlePaper}>投稿グループ一覧</Paper></Grid>
+            </Grid>
+            <br/>
+                <Grid container spacing={3}>
                     {_.map(groups, group => (
                        <Grid key={group.id} item xs={4}>
                          <Paper className={classes.paper}>
@@ -89,47 +94,7 @@ export const Top = (props) => {
                          </Paper>
                        </Grid>
                     ))} 
-
                 </Grid>
         </Container>
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const mapStateToProps = state => ({ groups: state.groups })
-
-// const mapDispatchToProps = ({ readGroups })
-
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Top);
