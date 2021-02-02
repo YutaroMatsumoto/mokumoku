@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -35,6 +36,29 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        logger('controllerにははいっている');
+        logger('controllerにははいっている');
         $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->only('showLoginForm');
+        $this->middleware('auth')->only('logout');
     }
+
+    public function showLoginForm()
+    {
+        logger('loginformをひょうじするよ');
+        logger('loginformをひょうじするよ');
+        logger('loginformをひょうじするよ');
+        return view('auth/login');
+    }
+
+    public function login(Request $request)
+    {
+        $this->validateLogin($request);
+
+        if ($this->attemptLogin($request)) {
+            return $this->sendLoginResponse($request);
+        }
+        return $this->sendFailedLoginResponse($request);
+    }
+
 }

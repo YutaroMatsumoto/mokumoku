@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{any}', function () {
+Route::get('/', function () {
     return view('welcome');
-})->where('any', '.*');
+    // return view('layouts/app');
+})->where('any', '.*')->middleware('auth');
+// })->where('any', '.*')->middleware('auth');
 
-Auth::routes();
+Route::group(['namespace' => 'App\Http\Controllers\Auth'], function() {
+    Route::get('login', 'LoginController@showLoginForm')->name('login');
+    Route::post('login', 'LoginController@login')->name('login');
+    Route::get('logout', 'LoginController@logout')->name('logout');
+});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // 11/10に追記コントローラーの修正が必要
-Route::get('/{item_posts}', 'App\Http\Controllers\ItemController@index');
+// Route::get('/{item_posts}', 'App\Http\Controllers\ItemController@index');
 
