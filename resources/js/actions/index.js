@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { values } from 'lodash'
 
 // reducerで利用するため、export
 export const READ_GROUPS = 'READ_GROUPS'
@@ -10,9 +11,16 @@ export const CREATE_POST = 'CREATE_POST'
 export const GET_POST = 'GET_POST'
 export const UPDATE_POST = 'UPDATE_POST'
 export const DELETE_POST = 'DELETE_POST'
+export const POST_LOGIN = 'POST_LOGIN'
 
 // viewのcomponent側で使用するため、exportする
 // tunkによって、actionの代わりに関数を返すことができるようになっている
+
+export const login = values => async dispatch => {
+    const response = await axios.post('/login', values)
+    dispatch({ type: POST_LOGIN, response })
+}
+
 export const readGroups = () => async dispatch => {
     const response =  await axios.get('/api/get')
     dispatch({ type: READ_GROUPS, response }) // reducerに渡す。これにより、actionはtype, responseのkeyをもつ

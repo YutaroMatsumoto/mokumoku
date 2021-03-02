@@ -7,6 +7,7 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { Top } from './components/Top'
+import { Login } from './components/login'
 import { GroupNew } from './components/group_new'
 // import PostNew from './components/post_new'
 import { GroupShow } from './components/group_show'
@@ -32,6 +33,7 @@ ReactDOM.render(
             <Switch>
                 <Route exact path="/" component={Top} />
                 <Route exact path="/groups" component={Top} />
+                <Route exact path="/login" component={Login} />
                 <Route path="/groups/new" component={GroupNew} />
                 <Route exact path="/groups/:id" component={PostIndex} />
                 <Route path="/groups/:id/edit" component={GroupShow} />

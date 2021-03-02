@@ -20,8 +20,14 @@ Route::get('/', function () {
 })->where('any', '.*')->middleware('auth');
 // })->where('any', '.*')->middleware('auth');
 
+// Route::group(['middleware' => 'api'], function() {
+	// Route::post('login', 'App\Http\Controllers\Auth\LoginController@login');
+	// Route::get('logout', 'App\Http\Controllers\Auth\LoginController@logout');
+// });
+
 Route::group(['namespace' => 'App\Http\Controllers\Auth'], function() {
-    Route::get('login', 'LoginController@showLoginForm')->name('login');
+    // Route::get('login', 'LoginController@showLoginForm')->name('login');
+    Route::get('login', 'LoginController@showLoginForm');
     Route::post('login', 'LoginController@login')->name('login');
     Route::get('logout', 'LoginController@logout')->name('logout');
 });

@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -47,18 +47,29 @@ class LoginController extends Controller
     {
         logger('loginformをひょうじするよ');
         logger('loginformをひょうじするよ');
-        logger('loginformをひょうじするよ');
         return view('auth/login');
+        // return view('welcome');
     }
 
     public function login(Request $request)
     {
+        logger('うごいてる？');
+        logger('うごいてる？');
         $this->validateLogin($request);
 
         if ($this->attemptLogin($request)) {
+            logger('attemptloginがtrue');
+            logger('attemptloginがtrue');
+            // logger($this->sendLoginResponse($request));
+            // logger('ログイン成功？');
             return $this->sendLoginResponse($request);
         }
         return $this->sendFailedLoginResponse($request);
     }
+
+    // public function authenticated()
+    // {
+        // logger('あいうえお');
+    // }
 
 }

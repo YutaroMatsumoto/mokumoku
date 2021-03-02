@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Group;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+// use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class GroupController extends Controller
 {
+    // use AuthenticatesUsers;
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +18,22 @@ class GroupController extends Controller
     public function index()
     {
         $groups = Group::all();
+        // ログイン中のユーザー情報
+        $user = Auth::user();
+        // $user = auth()->user();
+        // $guard = $this->guard()->user();
+        // logger('userとれてる？');
+        // logger($user);
+        // logger('userとれてる？');Auth::user()->name
+        // if(Auth::check()) {
+        if(Auth::user()) {
+            logger('ログインしているよ');
+            logger('ログインしているよ');
+        } else {
+            logger('ログインしていないよ');
+            logger('ログインしていないよ');
+
+        }
 
         return $groups;
     }
