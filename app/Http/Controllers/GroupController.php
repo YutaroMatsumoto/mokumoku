@@ -20,11 +20,9 @@ class GroupController extends Controller
         $groups = Group::all();
         // ログイン中のユーザー情報
         $user = Auth::user();
-        // $user = auth()->user();
-        // $guard = $this->guard()->user();
-        // logger('userとれてる？');
-        // logger($user);
-        // logger('userとれてる？');Auth::user()->name
+        logger('userとれてる？');
+        logger($user);
+        logger('userとれてる？');
         // if(Auth::check()) {
         if(Auth::user()) {
             logger('ログインしているよ');

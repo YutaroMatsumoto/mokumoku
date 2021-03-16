@@ -36,8 +36,8 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        logger('controllerにははいっている');
-        logger('controllerにははいっている');
+        // logger('controllerにははいっている');
+        // logger('controllerにははいっている');
         $this->middleware('guest')->except('logout');
         $this->middleware('guest')->only('showLoginForm');
         $this->middleware('auth')->only('logout');
@@ -45,23 +45,18 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        logger('loginformをひょうじするよ');
-        logger('loginformをひょうじするよ');
         return view('auth/login');
         // return view('welcome');
     }
 
     public function login(Request $request)
     {
-        logger('うごいてる？');
-        logger('うごいてる？');
+        logger('requestをひょうじ');
+        logger($request);
+        logger('requestをひょうじ');
         $this->validateLogin($request);
 
         if ($this->attemptLogin($request)) {
-            logger('attemptloginがtrue');
-            logger('attemptloginがtrue');
-            // logger($this->sendLoginResponse($request));
-            // logger('ログイン成功？');
             return $this->sendLoginResponse($request);
         }
         return $this->sendFailedLoginResponse($request);

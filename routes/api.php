@@ -15,25 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
-// Route::get('/user',function (Request $request) {
-	
-// 	$users = App\Models\User::all();
-	
-// 	return response()->json(['users' => $users]);ß
-
-// });
-
-// Route::get('/user/{user}', function(App\Models\User $user){
-
-// 	return response()->json(['user' => $user]);
-
-// });
-
-Route::group(['middleware' => 'api'], function() {
+// Route::group(['middleware' => 'api'], function() {
+Route::group(['middleware' => 'auth'], function() {
 	// グループ
 	Route::get('get', 'App\Http\Controllers\GroupController@index');
 	Route::post('add', 'App\Http\Controllers\GroupController@create');

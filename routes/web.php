@@ -14,7 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::group(['namespace' => 'App\Http\Controllers\Auth'], function() {
+    // Route::get('login', 'LoginController@showLoginForm')->name('login');
+    Route::get('login', 'LoginController@showLoginForm');
+    Route::post('login', 'LoginController@login')->name('login');
+    Route::get('logout', 'LoginController@logout')->name('logout');
+});
+
+
+Route::get('/{any}', function () {
     return view('welcome');
     // return view('layouts/app');
 })->where('any', '.*')->middleware('auth');
@@ -24,13 +32,6 @@ Route::get('/', function () {
 	// Route::post('login', 'App\Http\Controllers\Auth\LoginController@login');
 	// Route::get('logout', 'App\Http\Controllers\Auth\LoginController@logout');
 // });
-
-Route::group(['namespace' => 'App\Http\Controllers\Auth'], function() {
-    // Route::get('login', 'LoginController@showLoginForm')->name('login');
-    Route::get('login', 'LoginController@showLoginForm');
-    Route::post('login', 'LoginController@login')->name('login');
-    Route::get('logout', 'LoginController@logout')->name('logout');
-});
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
