@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -30,10 +31,10 @@ class PostController extends Controller
      */
     public function create(Request $request)
     {
-        $user_id = 1;
+        $user = Auth::user();
         $today = date('Y-m-d');
         $post = new Post;
-        $post->user_id = 1;
+        $post->user_id = $user->id;
         $post->group_id = $request->input('group_id');
         $post->title = $request->input('title');
         $post->date = $today;

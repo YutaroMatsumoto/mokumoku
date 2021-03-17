@@ -17,21 +17,9 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = Group::all();
         // ログイン中のユーザー情報
         $user = Auth::user();
-        logger('userとれてる？');
-        logger($user);
-        logger('userとれてる？');
-        // if(Auth::check()) {
-        if(Auth::user()) {
-            logger('ログインしているよ');
-            logger('ログインしているよ');
-        } else {
-            logger('ログインしていないよ');
-            logger('ログインしていないよ');
-
-        }
+        $groups = Group::where('user_id', $user->id)->get();
 
         return $groups;
     }
@@ -44,7 +32,8 @@ class GroupController extends Controller
     public function create(Request $request)
     {
         $group = new Group;
-        $group->user_id = 1;
+        $user = Auth::user();
+        $group->user_id = $user->id;
         $group->name = $request->input('name');
         $group->detail = $request->input('detail');
         $group->save();
