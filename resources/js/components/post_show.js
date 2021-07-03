@@ -116,7 +116,7 @@ export const PostShow = (props) => {
                             variant="outlined"
                             helperText={errors.content ? errors.content.message : false}
                             fullWidth={true}
-                            rows={5}/>}
+                            rows={15}/>}
                           name="content"
                           placeholder="内容"
                           defaultValue=""
